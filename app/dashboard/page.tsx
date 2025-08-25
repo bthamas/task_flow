@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { MainLayout } from '@/components/layout/MainLayout';
@@ -27,65 +27,6 @@ import { Project } from '@/types';
 
 type FilterType = 'all' | 'completed' | 'in_progress' | 'not_started' | 'clients';
 
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case 'completed':
-      return 'border-green-500';
-    case 'in_progress':
-      return 'border-blue-500';
-    default:
-      return 'border-gray-300';
-  }
-};
-
-const getProgressColor = (progress: number) => {
-  if (progress === 0) return 'bg-gray-200';
-  if (progress < 34) return 'bg-red-500';
-  if (progress < 67) return 'bg-orange-500';
-  if (progress < 100) return 'bg-yellow-500';
-  return 'bg-green-500';
-};
-
-const getProgressBorderColor = (progress: number) => {
-  if (progress === 0) return 'border-gray-300';
-  if (progress < 34) return 'border-red-500';
-  if (progress < 67) return 'border-orange-500';
-  if (progress < 100) return 'border-yellow-500';
-  return 'border-green-500';
-};
-
-const getProgressCardClass = (progress: number) => {
-  if (progress === 0) return 'card-progress-gray';
-  if (progress < 34) return 'card-progress-red';
-  if (progress < 67) return 'card-progress-orange';
-  if (progress < 100) return 'card-progress-yellow';
-  return 'card-progress-green';
-};
-
-const getStatusText = (status: string) => {
-  switch (status) {
-    case 'completed':
-      return 'Befejezett';
-    case 'in_progress':
-      return 'Folyamatban';
-    case 'not_started':
-      return 'Nem kezdődött el';
-    default:
-      return 'Létrehozva';
-  }
-};
-
-const getProgressBasedStatus = (progress: number) => {
-  if (progress === 100) return 'Befejezett';
-  if (progress > 0) return 'Folyamatban';
-  return 'Nem kezdődött el';
-};
-
-// Use the progress_percentage from the database instead of calculating it
-const getProjectProgress = (project: Project): number => {
-  return project.progress_percentage || 0;
-};
-
 export default function DashboardPage() {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -93,46 +34,91 @@ export default function DashboardPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showSearch, setShowSearch] = useState(false);
   
+  // Helper functions - defined inside component using useCallback
+  const getStatusColor = useCallback((status: string) => {
+    switch (status) {
+      case 'completed':
+        return 'border-green-500';
+      case 'in_progress':
+        return 'border-blue-500';
+      default:
+        return 'border-gray-300';
+    }
+  }, []);
+
+  const getProgressColor = useCallback((progress: number) => {
+    if (progress === 0) return 'bg-gray-200';
+    if (progress < 34) return 'bg-red-500';
+    if (progress < 67) return 'bg-orange-500';
+    if (progress < 100) return 'bg-yellow-500';
+    return 'bg-green-500';
+  }, []);
+
+  const getProgressBorderColor = useCallback((progress: number) => {
+    if (progress === 0) return 'border-gray-300';
+    if (progress < 34) return 'border-red-500';
+    if (progress < 67) return 'border-orange-500';
+    if (progress < 100) return 'border-yellow-500';
+    return 'border-green-500';
+  }, []);
+
+  const getProgressCardClass = useCallback((progress: number) => {
+    if (progress === 0) return 'card-progress-gray';
+    if (progress < 34) return 'card-progress-red';
+    if (progress < 67) return 'card-progress-orange';
+    if (progress < 100) return 'card-progress-yellow';
+    return 'card-progress-green';
+  }, []);
+
+  const getStatusText = useCallback((status: string) => {
+    switch (status) {
+      case 'completed':
+        return 'Befejezett';
+      case 'in_progress':
+        return 'Folyamatban';
+      case 'not_started':
+        return 'Nem kezdődött el';
+      default:
+        return 'Létrehozva';
+    }
+  }, []);
+
+  const getProgressBasedStatus = useCallback((progress: number) => {
+    if (progress === 100) return 'Befejezett';
+    if (progress > 0) return 'Folyamatban';
+    return 'Nem kezdődött el';
+  }, []);
+
+  // Use the progress_percentage from the database instead of calculating it - use useCallback to prevent recreation
+  const getProjectProgress = useCallback((project: Project): number => {
+    return project.progress_percentage || 0;
+  }, []);
+
   // Fetch all projects with automatic refetch
   const { data: allProjects = [], isLoading: projectsLoading, error: projectsError } = useQuery({
     queryKey: ['projects'],
     queryFn: () => projectsApi.getProjects(),
-    refetchInterval: 10000, // Refetch every 10 seconds instead of 500ms
-    staleTime: 5000, // Consider data fresh for 5 seconds
-    refetchOnWindowFocus: true, // Refetch when window gains focus
-    refetchOnMount: true, // Refetch when component mounts
-    refetchOnReconnect: true, // Refetch when reconnecting
-    gcTime: 300000, // Cache data for 5 minutes
-    retry: 2, // Retry failed requests
-    retryDelay: 1000, // Wait 1 second between retries
+    refetchInterval: 30000, // Refetch every 30 seconds instead of 10 seconds to reduce jumping
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 10, // 10 minutes
   });
 
   // Fetch all clients
   const { data: allClients = [], isLoading: clientsLoading, error: clientsError } = useQuery({
     queryKey: ['clients'],
     queryFn: () => clientsApi.getClients(),
-    refetchInterval: 10000, // Refetch every 10 seconds instead of 500ms
-    staleTime: 5000, // Consider data fresh for 5 seconds
-    refetchOnWindowFocus: true, // Refetch when window gains focus
-    refetchOnMount: true, // Refetch when component mounts
-    refetchOnReconnect: true, // Refetch when reconnecting
-    gcTime: 300000, // Cache data for 5 minutes
-    retry: 2, // Retry failed requests
-    retryDelay: 1000, // Wait 1 second between retries
+    refetchInterval: 30000, // Refetch every 30 seconds
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 10, // 10 minutes
   });
 
-  // Fetch all tasks for projects
+  // Fetch all tasks for dashboard
   const { data: allTasks = [], isLoading: tasksLoading, error: tasksError } = useQuery({
     queryKey: ['tasks'],
     queryFn: () => tasksApi.getTasks(),
-    refetchInterval: 10000, // Refetch every 10 seconds instead of 500ms
-    staleTime: 5000, // Consider data fresh for 5 seconds
-    refetchOnWindowFocus: true, // Refetch when window gains focus
-    refetchOnMount: true, // Refetch when component mounts
-    refetchOnReconnect: true, // Refetch when reconnecting
-    gcTime: 300000, // Cache data for 5 minutes
-    retry: 2, // Retry failed requests
-    retryDelay: 1000, // Wait 1 second between retries
+    refetchInterval: 30000, // Refetch every 30 seconds
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 10, // 10 minutes
   });
 
   // Manual refresh button instead of automatic interval
@@ -155,79 +141,74 @@ export default function DashboardPage() {
   // Remove the excessive progress syncing that blocks the UI
   // Only sync when explicitly needed, not on every render
 
-  // Helper function to get project progress
-  const getProjectProgress = (project: any): number => {
-    // Always use the database progress_percentage field
-    const progress = project.progress_percentage !== undefined ? project.progress_percentage : 0;
-    return progress;
-  };
-
-  // Helper functions to get task counts for a project
-  const getProjectTaskCounts = (projectId: string) => {
-    // Use the same logic as project detail page - filter from allTasks
-    if (!allTasks || allTasks.length === 0) {
-      return { completedTasks: 0, totalTasks: 0 };
-    }
-    
-    const projectTasks = allTasks.filter(task => task.project_id === projectId);
-    const completedTasks = projectTasks.filter(task => task.is_completed).length;
-    const totalTasks = projectTasks.length;
-    
-    // Debug logging to see what's happening
-    console.log(`🔍 Dashboard Task Counts for Project ${projectId}:`, {
-      allTasksLength: allTasks.length,
-      projectTasksLength: projectTasks.length,
-      completedTasks,
-      totalTasks,
-      sampleTask: allTasks[0],
-      projectTasks: projectTasks
-    });
-    
-    return { completedTasks, totalTasks };
-  };
-
-  // Calculate statistics based on actual progress
-  const totalProjects = allProjects.length;
-  const completedProjects = allProjects.filter(p => getProjectProgress(p) === 100).length;
-  const inProgressProjects = allProjects.filter(p => {
-    const progress = getProjectProgress(p);
-    return progress > 0 && progress < 100;
-  }).length;
-  const activeClients = allClients.filter(c => c.is_active !== false).length;
-
-  // Filter projects based on active filter, progress, and search term
-  const filteredProjects = allProjects.filter(project => {
-    const progress = getProjectProgress(project);
-    
-    // Apply search filter
-    if (searchTerm) {
-      const searchLower = searchTerm.toLowerCase();
-      const projectTitle = project.title?.toLowerCase() || '';
-      const clientName = project.client?.name?.toLowerCase() || '';
-      const projectDescription = project.description?.toLowerCase() || '';
-      
-      if (!projectTitle.includes(searchLower) && 
-          !clientName.includes(searchLower) && 
-          !projectDescription.includes(searchLower)) {
-        return false;
+  // Helper functions to get task counts for a project - use useMemo to prevent recalculation
+  const getProjectTaskCounts = useMemo(() => {
+    return (projectId: string) => {
+      // Use the same logic as project detail page - filter from allTasks
+      if (!allTasks || allTasks.length === 0) {
+        return { completedTasks: 0, totalTasks: 0 };
       }
-    }
-    
-    if (activeFilter === 'all') return true;
-    if (activeFilter === 'clients') {
-      // Show clients with non-completed projects
-      return progress < 100;
-    }
-    if (activeFilter === 'completed') return progress === 100;
-    if (activeFilter === 'in_progress') return progress > 0 && progress < 100;
-    if (activeFilter === 'not_started') return progress === 0;
-    
-    return true;
-  });
+      
+      const projectTasks = allTasks.filter(task => task.project_id === projectId);
+      const completedTasks = projectTasks.filter(task => task.is_completed).length;
+      const totalTasks = projectTasks.length;
+      
+      return { completedTasks, totalTasks };
+    };
+  }, [allTasks]);
 
-  // Get all filtered projects (no limit)
-  const recentProjects = filteredProjects
-    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  // Calculate statistics based on actual progress - use useMemo to prevent recalculation
+  const statsData = useMemo(() => {
+    const totalProjects = allProjects.length;
+    const completedProjects = allProjects.filter(p => getProjectProgress(p) === 100).length;
+    const inProgressProjects = allProjects.filter(p => {
+      const progress = getProjectProgress(p);
+      return progress > 0 && progress < 100;
+    }).length;
+    const activeClients = allClients.filter(c => c.is_active !== false).length;
+    
+    return { totalProjects, completedProjects, inProgressProjects, activeClients };
+  }, [allProjects, allClients]);
+
+  const { totalProjects, completedProjects, inProgressProjects, activeClients } = statsData;
+
+  // Filter projects based on active filter, progress, and search term - use useMemo to prevent recalculation
+  const filteredProjects = useMemo(() => {
+    return allProjects.filter(project => {
+      const progress = getProjectProgress(project);
+      
+      // Apply search filter
+      if (searchTerm) {
+        const searchLower = searchTerm.toLowerCase();
+        const projectTitle = project.title?.toLowerCase() || '';
+        const clientName = project.client?.name?.toLowerCase() || '';
+        const projectDescription = project.description?.toLowerCase() || '';
+        
+        if (!projectTitle.includes(searchLower) && 
+            !clientName.includes(searchLower) && 
+            !projectDescription.includes(searchLower)) {
+          return false;
+        }
+      }
+      
+      if (activeFilter === 'all') return true;
+      if (activeFilter === 'clients') {
+        // Show clients with non-completed projects
+        return progress < 100;
+      }
+      if (activeFilter === 'completed') return progress === 100;
+      if (activeFilter === 'in_progress') return progress > 0 && progress < 100;
+      if (activeFilter === 'not_started') return progress === 0;
+      
+      return true;
+    });
+  }, [allProjects, searchTerm, activeFilter]);
+
+  // Get all filtered projects (no limit) - use useMemo to prevent recalculation
+  const recentProjects = useMemo(() => {
+    return filteredProjects
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  }, [filteredProjects]);
 
   const stats = [
     { 
@@ -260,6 +241,77 @@ export default function DashboardPage() {
     },
   ];
   
+  // Optimize progress bar rendering to prevent jumping
+  const renderProgressBar = useCallback((project: Project) => {
+    const projectProgress = getProjectProgress(project);
+    const { completedTasks, totalTasks } = getProjectTaskCounts(project.id);
+    
+    return (
+      <motion.div
+        key={project.id}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.1 }}
+      >
+        <Card 
+          className={`${getProgressCardClass(projectProgress)} cursor-pointer hover:shadow-lg transition-all duration-200`}
+          onClick={() => router.push(`/projects/${project.id}`)}
+        >
+          <div className="space-y-4">
+            <div>
+              <h3 className="font-semibold text-gray-900">{project.title}</h3>
+              {project.client && (
+                <p 
+                  className="text-sm text-gray-600 hover:text-blue-600 cursor-pointer transition-colors"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (project.client) {
+                      router.push(`/clients/${project.client.id}`);
+                    }
+                  }}
+                >
+                  {project.client.name}
+                </p>
+              )}
+            </div>
+            
+            <div>
+              <div className="flex justify-between text-sm text-gray-600 mb-2">
+                <span>Haladás ({completedTasks}/{totalTasks} feladat)</span>
+                <span className="font-semibold text-blue-600">
+                  {projectProgress}%
+                </span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <span
+                  className={`h-2 rounded-full progress-bar-smooth ${getProgressColor(projectProgress)} block`}
+                  style={{ width: `${projectProgress}%` }}
+                />
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-gray-500">
+                {project.end_date ? 
+                  `Határidő: ${new Date(project.end_date).toLocaleDateString('hu-HU')}` :
+                  'Nincs határidő'
+                }
+              </span>
+              <span className={`
+                px-2 py-1 rounded-full text-xs font-medium
+                ${projectProgress === 100 ? 'bg-green-100 text-green-700 border border-green-200' : 
+                  projectProgress > 0 ? 'bg-blue-100 text-blue-700 border border-blue-200' : 
+                  'bg-gray-100 text-gray-700 border border-gray-200'}
+              `}>
+                {getProgressBasedStatus(projectProgress)}
+              </span>
+            </div>
+          </div>
+        </Card>
+      </motion.div>
+    );
+  }, [getProjectTaskCounts, router, getProjectProgress, getProgressCardClass, getProgressColor, getProgressBasedStatus]);
+
   return (
     <MainLayout>
       <div className="space-y-6">
@@ -494,72 +546,10 @@ export default function DashboardPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {recentProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                                                       <Card 
-                    className={`${getProgressCardClass(getProjectProgress(project))} cursor-pointer hover:shadow-lg transition-all duration-200`}
-                    onClick={() => router.push(`/projects/${project.id}`)}
-                  >
-                     <div className="space-y-4">
-                       <div>
-                         <h3 className="font-semibold text-gray-900">{project.title}</h3>
-                         {project.client && (
-                           <p 
-                             className="text-sm text-gray-600 hover:text-blue-600 cursor-pointer transition-colors"
-                             onClick={(e) => {
-                               e.stopPropagation();
-                                                               if (project.client) {
-                                  router.push(`/clients/${project.client.id}`);
-                                }
-                             }}
-                           >
-                             {project.client.name}
-                           </p>
-                         )}
-                       </div>
-                       
-                       <div>
-                         <div className="flex justify-between text-sm text-gray-600 mb-2">
-                           <span>Haladás ({(() => {
-                             const { completedTasks, totalTasks } = getProjectTaskCounts(project.id);
-                             return `${completedTasks}/${totalTasks} feladat`;
-                           })()})</span>
-                           <span className="font-semibold text-blue-600">
-                             {getProjectProgress(project)}%
-                           </span>
-                         </div>
-                         <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                           <span
-                             className={`h-2 rounded-full progress-bar-smooth ${getProgressColor(getProjectProgress(project))} block`}
-                             style={{ width: `${getProjectProgress(project)}%` }}
-                           />
-                         </div>
-                       </div>
-                       
-                       <div className="flex items-center justify-between">
-                         <span className="text-xs text-gray-500">
-                           {project.end_date ? 
-                             `Határidő: ${new Date(project.end_date).toLocaleDateString('hu-HU')}` :
-                             'Nincs határidő'
-                           }
-                         </span>
-                         <span className={`
-                           px-2 py-1 rounded-full text-xs font-medium
-                           ${getProjectProgress(project) === 100 ? 'bg-green-100 text-green-700 border border-green-200' : 
-                             getProjectProgress(project) > 0 ? 'bg-blue-100 text-blue-700 border border-blue-200' : 
-                             'bg-gray-100 text-gray-700 border border-gray-200'}
-                         `}>
-                           {getProgressBasedStatus(getProjectProgress(project))}
-                         </span>
-                       </div>
-                     </div>
-                   </Card>
-                </motion.div>
+              {recentProjects.map((project) => (
+                <div key={project.id}>
+                  {renderProgressBar(project)}
+                </div>
               ))}
             </div>
           )}

@@ -57,6 +57,14 @@ const getProgressColor = (progress: number) => {
   return 'bg-green-500';
 };
 
+const getProgressCardClass = (progress: number) => {
+  if (progress === 0) return 'card-progress-gray';
+  if (progress < 34) return 'card-progress-red';
+  if (progress < 67) return 'card-progress-orange';
+  if (progress < 100) return 'card-progress-yellow';
+  return 'card-progress-green';
+};
+
 const getPriorityColor = (priority: string) => {
   switch (priority) {
     case 'high':
@@ -205,8 +213,6 @@ export default function ProjectDetailPage() {
       const completedTasks = updatedTasks.filter(t => t.is_completed).length;
       const totalTasks = updatedTasks.length;
       const progressPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
-      
-      console.log(`🔄 Toggle Task - ${project?.title}: ${completedTasks}/${totalTasks} = ${progressPercentage}%`);
       
       // Update project progress
       await projectsApi.updateProject(projectId, {
@@ -403,14 +409,11 @@ export default function ProjectDetailPage() {
   // Sync progress if there's a mismatch
   useEffect(() => {
     if (project && tasks.length > 0 && calculatedProgress !== project.progress_percentage) {
-      console.log(`⚠️ Progress mismatch detected for ${project.title}: DB=${project.progress_percentage}%, Calculated=${calculatedProgress}%`);
-      
       // Update the project progress in database
       projectsApi.updateProject(projectId, {
         progress_percentage: calculatedProgress,
         project_status: calculatedProgress === 100 ? 'completed' : calculatedProgress > 0 ? 'in_progress' : 'not_started'
       }).then(() => {
-        console.log(`✅ Progress synced for ${project.title}: ${calculatedProgress}%`);
         queryClient.invalidateQueries({ queryKey: ['project', projectId] });
         queryClient.invalidateQueries({ queryKey: ['projects'] });
       }).catch(error => {
@@ -425,19 +428,13 @@ export default function ProjectDetailPage() {
       const scrollTop = window.scrollY;
       const threshold = 100; // Start expanding after 100px scroll
       
-      console.log(`📜 Scroll: ${scrollTop}px, Threshold: ${threshold}px, isProgressBarExpanded: ${isProgressBarExpanded}`);
-      
       if (scrollTop > threshold && !isProgressBarExpanded) {
-        console.log(`✅ Expanding progress bar - setting isProgressBarExpanded to true`);
         setIsProgressBarExpanded(true);
       } else if (scrollTop <= threshold && isProgressBarExpanded) {
-        console.log(`🔽 Collapsing progress bar - setting isProgressBarExpanded to false`);
         setIsProgressBarExpanded(false);
       }
     };
 
-    console.log(`🎯 Setting up scroll event listener for project ${projectId}`);
-    
     // Add scroll event listener
     window.addEventListener('scroll', handleScroll, { passive: true });
     
@@ -445,10 +442,14 @@ export default function ProjectDetailPage() {
     handleScroll();
     
     return () => {
-      console.log(`🧹 Cleaning up scroll event listener for project ${projectId}`);
       window.removeEventListener('scroll', handleScroll);
     };
   }, [isProgressBarExpanded, projectId]);
+
+  // Debug state changes
+  useEffect(() => {
+    // State change logging removed for cleaner console
+  }, [isProgressBarExpanded]);
 
   if (projectLoading) {
     return (
@@ -474,27 +475,11 @@ export default function ProjectDetailPage() {
     );
   }
 
-  // Debug log to see the difference
-  console.log(`🔍 Project Detail - ${project.title}: DB=${project.progress_percentage}%, Calculated=${calculatedProgress}%, Tasks=${completedTasks}/${totalTasks}`);
-
   return (
     <MainLayout>
-      {/* Debug info */}
-      <div className="fixed top-0 left-0 bg-red-500 text-white p-2 text-xs z-[9999]">
-        Debug: isProgressBarExpanded={isProgressBarExpanded.toString()}, 
-        completedTasks={completedTasks}, 
-        totalTasks={totalTasks}
-        <button 
-          onClick={() => setIsProgressBarExpanded(!isProgressBarExpanded)}
-          className="ml-2 px-2 py-1 bg-blue-500 text-white rounded text-xs"
-        >
-          Toggle Sticky
-        </button>
-      </div>
-      
       {/* Dynamic Progress Bar */}
       {isProgressBarExpanded && (
-        <div className="fixed top-16 z-50 bg-white border-b border-gray-200 shadow-sm w-full px-6 py-4">
+        <div className={`fixed top-16 z-[9998] bg-blue-50 border-b-2 border-blue-300 shadow-lg w-full px-6 py-4 ${getProgressCardClass(progressPercentage)}`}>
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
@@ -578,7 +563,7 @@ export default function ProjectDetailPage() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Project Info */}
-            <Card>
+            <Card className={`${getProgressCardClass(progressPercentage)}`}>
               <div className="space-y-4">
                 <div className="flex items-start justify-between">
                   <div>
@@ -627,7 +612,7 @@ export default function ProjectDetailPage() {
             </Card>
 
             {/* Tasks */}
-            <Card>
+            <Card className={`${getProgressCardClass(progressPercentage)}`}>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold text-gray-900">Feladatok</h2>
                 <Button 
@@ -682,7 +667,7 @@ export default function ProjectDetailPage() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Client Info */}
-            <Card>
+            <Card className={`${getProgressCardClass(progressPercentage)}`}>
               <div className="flex items-center space-x-3 mb-4">
                 <User className="h-5 w-5 text-blue-600" />
                 <h3 className="text-lg font-semibold text-gray-900">Ügyfél</h3>
@@ -713,7 +698,7 @@ export default function ProjectDetailPage() {
             </Card>
 
             {/* Project Stats */}
-            <Card>
+            <Card className={`${getProgressCardClass(progressPercentage)}`}>
               <div className="flex items-center space-x-3 mb-4">
                 <TrendingUp className="h-5 w-5 text-green-600" />
                 <h3 className="text-lg font-semibold text-gray-900">Statisztikák</h3>

@@ -37,19 +37,32 @@ export function TaskItem({ task, onToggle, onEdit, onDelete }: TaskItemProps) {
     }
   };
 
+  const getProgressBorderClass = (isCompleted: boolean) => {
+    if (isCompleted) return 'card-progress-green';
+    return 'card-progress-orange';
+  };
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Don't toggle if clicking on edit/delete buttons
+    if ((e.target as HTMLElement).closest('button[data-action="edit"], button[data-action="delete"]')) {
+      return;
+    }
+    onToggle(task.id);
+  };
+
   return (
-    <div className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+    <div 
+      className={`border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer group ${getProgressBorderClass(task.is_completed)}`}
+      onClick={handleCardClick}
+    >
       <div className="flex items-start space-x-3">
-                  <button
-            onClick={() => onToggle(task.id)}
-            className="mt-1 hover:scale-110 transition-transform"
-          >
-            {task.is_completed ? (
-              <CheckCircle className="h-5 w-5 text-green-600" />
-            ) : (
-              <Circle className="h-5 w-5 text-gray-400 hover:text-gray-600" />
-            )}
-          </button>
+        <div className="mt-1">
+          {task.is_completed ? (
+            <CheckCircle className="h-5 w-5 text-green-600" />
+          ) : (
+            <Circle className="h-5 w-5 text-gray-400 group-hover:text-gray-600" />
+          )}
+        </div>
         
         <div className="flex-1 min-w-0">
           <div className="flex items-center space-x-2">
@@ -81,13 +94,21 @@ export function TaskItem({ task, onToggle, onEdit, onDelete }: TaskItemProps) {
         
         <div className="flex space-x-2">
           <button
-            onClick={() => onEdit(task)}
+            data-action="edit"
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit(task);
+            }}
             className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
           >
             <Edit className="h-4 w-4" />
           </button>
           <button
-            onClick={() => onDelete(task.id)}
+            data-action="delete"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete(task.id);
+            }}
             className="p-1 text-gray-400 hover:text-red-600 transition-colors"
           >
             <Trash2 className="h-4 w-4" />

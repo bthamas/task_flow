@@ -140,7 +140,10 @@ a {
 .theme-glass aside,
 .theme-glass .bg-white,
 .theme-glass .bg-gray-50,
-.theme-glass .bg-gray-100 {
+.theme-glass .bg-gray-100,
+.theme-glass .MainLayout,
+.theme-glass .Sidebar,
+.theme-glass .Header {
   background: var(--glass-bg) !important;
   backdrop-filter: var(--glass-backdrop);
   -webkit-backdrop-filter: var(--glass-backdrop);
@@ -168,7 +171,10 @@ a {
 .theme-dark aside,
 .theme-dark .bg-white,
 .theme-dark .bg-gray-50,
-.theme-dark .bg-gray-100 {
+.theme-dark .bg-gray-100,
+.theme-dark .MainLayout,
+.theme-dark .Sidebar,
+.theme-dark .Header {
   background: var(--dark-surface) !important;
   border-color: var(--dark-border) !important;
   box-shadow: var(--dark-shadow);
@@ -192,7 +198,10 @@ a {
 .theme-sunset aside,
 .theme-sunset .bg-white,
 .theme-sunset .bg-gray-50,
-.theme-sunset .bg-gray-100 {
+.theme-sunset .bg-gray-100,
+.theme-sunset .MainLayout,
+.theme-sunset .Sidebar,
+.theme-sunset .Header {
   background: var(--sunset-surface) !important;
   border-color: var(--sunset-border) !important;
   box-shadow: var(--sunset-shadow);
@@ -216,7 +225,10 @@ a {
 .theme-ocean aside,
 .theme-ocean .bg-white,
 .theme-ocean .bg-gray-50,
-.theme-ocean .bg-gray-100 {
+.theme-ocean .bg-gray-100,
+.theme-ocean .MainLayout,
+.theme-ocean .Sidebar,
+.theme-ocean .Header {
   background: var(--ocean-surface) !important;
   border-color: var(--ocean-border) !important;
   box-shadow: var(--ocean-shadow);
@@ -240,7 +252,10 @@ a {
 .theme-forest aside,
 .theme-forest .bg-white,
 .theme-forest .bg-gray-50,
-.theme-forest .bg-gray-100 {
+.theme-forest .bg-gray-100,
+.theme-forest .MainLayout,
+.theme-forest .Sidebar,
+.theme-forest .Header {
   background: var(--forest-surface) !important;
   border-color: var(--forest-border) !important;
   box-shadow: var(--forest-shadow);
@@ -1740,4 +1755,258 @@ a {
 .theme-ocean .border-l-4.border-purple-500 .text-gray-500,
 .theme-forest .border-l-4.border-purple-500 .text-gray-500 {
   color: #6b7280 !important;
+}
+
+/* Glass Theme Text and Cards */
+.theme-glass .text-gray-900,
+.theme-glass .text-gray-800,
+.theme-glass .text-gray-700,
+.theme-glass .text-gray-600,
+.theme-glass .text-gray-500,
+.theme-glass h1,
+.theme-glass h2,
+.theme-glass h3,
+.theme-glass p,
+.theme-glass span {
+  color: #ffffff !important;
+}
+
+.theme-glass .Card,
+.theme-glass .bg-white,
+.theme-glass .bg-gray-50,
+.theme-glass .bg-gray-100 {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* Dark Theme Text and Cards */
+.theme-dark .text-gray-900,
+.theme-dark .text-gray-800,
+.theme-dark .text-gray-700,
+.theme-dark .text-gray-600,
+.theme-dark .text-gray-500,
+.theme-dark h1,
+.theme-dark h2,
+.theme-dark h3,
+.theme-dark p,
+.theme-dark span {
+  color: #f1f5f9 !important;
+}
+
+.theme-dark .Card,
+.theme-dark .bg-white,
+.theme-dark .bg-gray-50,
+.theme-dark .bg-gray-100 {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.5);
+}
+
+/* Sunset Theme Text and Cards */
+.theme-sunset .text-gray-900,
+.theme-sunset .text-gray-800,
+.theme-sunset .text-gray-700,
+.theme-sunset .text-gray-600,
+.theme-sunset .text-gray-500,
+.theme-sunset h1,
+.theme-sunset h2,
+.theme-sunset h3,
+.theme-sunset p,
+.theme-sunset span {
+  color: #ffffff !important;
+}
+
+.theme-sunset .Card,
+.theme-sunset .bg-white,
+.theme-sunset .bg-gray-50,
+.theme-sunset .bg-gray-100 {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 10px 25px -3px rgba(251, 191, 36, 0.3);
+}
+
+/* Ocean Theme Text and Cards */
+.theme-ocean .text-gray-900,
+.theme-ocean .text-gray-800,
+.theme-ocean .text-gray-700,
+.theme-ocean .text-gray-600,
+.theme-ocean .text-gray-500,
+.theme-ocean h1,
+.theme-ocean h2,
+.theme-ocean h3,
+.theme-ocean p,
+.theme-ocean span {
+  color: #ffffff !important;
+}
+
+.theme-ocean .Card,
+.theme-ocean .bg-white,
+.theme-ocean .bg-gray-50,
+.theme-ocean .bg-gray-100 {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 10px 25px -3px rgba(34, 211, 238, 0.3);
+}
+
+/* Forest Theme Text and Cards */
+.theme-forest .text-gray-900,
+.theme-forest .text-gray-800,
+.theme-forest .text-gray-700,
+.theme-forest .text-gray-600,
+.theme-forest .text-gray-500,
+.theme-forest h1,
+.theme-forest h2,
+.theme-forest h3,
+.theme-forest p,
+.theme-forest span {
+  color: #ffffff !important;
+}
+
+.theme-forest .Card,
+.theme-forest .bg-white,
+.theme-forest .bg-gray-50,
+.theme-forest .bg-gray-100 {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 10px 25px -3px rgba(52, 211, 153, 0.3);
+}
+
+/* Card Component Theme Styling */
+.theme-glass .Card,
+.theme-glass .card,
+.theme-glass [class*="card"] {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.theme-dark .Card,
+.theme-dark .card,
+.theme-dark [class*="card"] {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.5);
+}
+
+.theme-sunset .Card,
+.theme-sunset .card,
+.theme-sunset [class*="card"] {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 10px 25px -3px rgba(251, 191, 36, 0.3);
+}
+
+.theme-ocean .Card,
+.theme-ocean .card,
+.theme-ocean [class*="card"] {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 10px 25px -3px rgba(34, 211, 238, 0.3);
+}
+
+.theme-forest .Card,
+.theme-forest .card,
+.theme-forest [class*="card"] {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 10px 25px -3px rgba(52, 211, 153, 0.3);
+}
+
+/* Button Component Theme Styling */
+.theme-glass .Button,
+.theme-glass .button,
+.theme-glass [class*="button"],
+.theme-glass button {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  color: #ffffff !important;
+}
+
+.theme-dark .Button,
+.theme-dark .button,
+.theme-dark [class*="button"],
+.theme-dark button {
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.5);
+  color: #f1f5f9 !important;
+}
+
+.theme-sunset .Button,
+.theme-sunset .button,
+.theme-sunset [class*="button"],
+.theme-sunset button {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 10px 25px -3px rgba(251, 191, 36, 0.3);
+  color: #ffffff !important;
+}
+
+.theme-ocean .Button,
+.theme-ocean .button,
+.theme-ocean [class*="button"],
+.theme-ocean button {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 10px 25px -3px rgba(34, 211, 238, 0.3);
+  color: #ffffff !important;
+}
+
+.theme-forest .Button,
+.theme-forest .button,
+.theme-forest [class*="button"],
+.theme-forest button {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 10px 25px -3px rgba(52, 211, 153, 0.3);
+  color: #ffffff !important;
+}
+
+/* Progress Bar Theme Styling - Preserve Original Colors */
+.theme-glass .progress-bar,
+.theme-glass .progress-bar-smooth,
+.theme-glass [class*="progress"] {
+  background: #3b82f6 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.theme-dark .progress-bar,
+.theme-dark .progress-bar-smooth,
+.theme-dark [class*="progress"] {
+  background: #3b82f6 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.theme-sunset .progress-bar,
+.theme-sunset .progress-bar-smooth,
+.theme-sunset [class*="progress"] {
+  background: #3b82f6 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.theme-ocean .progress-bar,
+.theme-ocean .progress-bar-smooth,
+.theme-ocean [class*="progress"] {
+  background: #3b82f6 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.theme-forest .progress-bar,
+.theme-forest .progress-bar-smooth,
+.theme-forest [class*="progress"] {
+  background: #3b82f6 !important;
+  border: none !important;
+  box-shadow: none !important;
 }
