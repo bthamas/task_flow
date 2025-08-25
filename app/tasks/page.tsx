@@ -31,6 +31,14 @@ const getProgressColor = (progress: number) => {
   return 'bg-green-500';
 };
 
+const getProgressCardClass = (progress: number) => {
+  if (progress === 0) return 'card-progress-gray';
+  if (progress < 34) return 'card-progress-red';
+  if (progress < 67) return 'card-progress-orange';
+  if (progress < 100) return 'card-progress-yellow';
+  return 'card-progress-green';
+};
+
 export default function TasksPage() {
   const [isCreateNoteModalOpen, setIsCreateNoteModalOpen] = useState(false);
   const [editingNote, setEditingNote] = useState<Note | null>(null);
@@ -58,9 +66,11 @@ export default function TasksPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
       setIsCreateNoteModalOpen(false);
+      toast.dismiss(); // Clear any existing toasts
       toast.success('Jegyzet sikeresen létrehozva!');
     },
     onError: (error) => {
+      toast.dismiss(); // Clear any existing toasts
       toast.error('Hiba történt a jegyzet létrehozásakor');
       console.error('Create note error:', error);
     },
@@ -73,9 +83,11 @@ export default function TasksPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
       setEditingNote(null);
+      toast.dismiss(); // Clear any existing toasts
       toast.success('Jegyzet sikeresen frissítve!');
     },
     onError: (error) => {
+      toast.dismiss(); // Clear any existing toasts
       toast.error('Hiba történt a jegyzet frissítésekor');
       console.error('Update note error:', error);
     },
@@ -86,9 +98,11 @@ export default function TasksPage() {
     mutationFn: (noteId: string) => notesApi.deleteNote(noteId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
+      toast.dismiss(); // Clear any existing toasts
       toast.success('Jegyzet sikeresen törölve!');
     },
     onError: (error) => {
+      toast.dismiss(); // Clear any existing toasts
       toast.error('Hiba történt a jegyzet törlésekor');
       console.error('Delete note error:', error);
     },
@@ -100,9 +114,11 @@ export default function TasksPage() {
       notesApi.createSimpleTask(taskData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
+      toast.dismiss(); // Clear any existing toasts
       toast.success('Feladat hozzáadva!');
     },
     onError: (error) => {
+      toast.dismiss(); // Clear any existing toasts
       toast.error('Hiba történt a feladat hozzáadásakor');
       console.error('Create simple task error:', error);
     },
@@ -116,6 +132,7 @@ export default function TasksPage() {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
     },
     onError: (error) => {
+      toast.dismiss(); // Clear any existing toasts
       toast.error('Hiba történt a feladat állapotának módosításakor');
       console.error('Toggle simple task error:', error);
     },
@@ -126,9 +143,11 @@ export default function TasksPage() {
     mutationFn: (taskId: string) => notesApi.deleteSimpleTask(taskId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
+      toast.dismiss(); // Clear any existing toasts
       toast.success('Feladat törölve!');
     },
     onError: (error) => {
+      toast.dismiss(); // Clear any existing toasts
       toast.error('Hiba történt a feladat törlésekor');
       console.error('Delete simple task error:', error);
     },
@@ -261,7 +280,7 @@ export default function TasksPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="h-full">
+              <Card className={`h-full ${getProgressCardClass(calculateNoteProgress(note))}`}>
                 <div className="space-y-4">
                   {/* Note Header */}
                   <div className="flex items-start justify-between">
@@ -288,15 +307,19 @@ export default function TasksPage() {
                   </div>
 
                   {/* Note Content */}
-                  {note.content && (
-                    <p className="text-sm text-gray-600">{note.content}</p>
-                  )}
+                  <div>
+                    <p className="text-sm text-gray-600">
+                      {note.content || 'Nincs leírás'}
+                    </p>
+                  </div>
 
                   {/* Progress */}
                   <div>
                     <div className="flex justify-between text-sm text-gray-600 mb-2">
                       <span>Haladás</span>
-                      <span className="font-semibold">{calculateNoteProgress(note)}%</span>
+                      <span className="font-semibold">
+                        ({note.tasks.filter(task => task.is_completed).length}/{note.tasks.length}) {calculateNoteProgress(note)}%
+                      </span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <span
@@ -342,25 +365,28 @@ export default function TasksPage() {
                     </div>
 
                     {/* Add New Task */}
-                    <div className="flex space-x-2 pt-2">
-                      <Input
-                        value={newTaskInputs[note.id] || ''}
-                        onChange={(value) => setNewTaskInputs(prev => ({ ...prev, [note.id]: value }))}
-                        placeholder="Új feladat..."
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter') {
-                            handleAddTask(note.id);
-                          }
-                        }}
-                        className="flex-1"
-                      />
-                      <Button
-                        size="sm"
-                        onClick={() => handleAddTask(note.id)}
-                        disabled={!newTaskInputs[note.id]?.trim()}
-                      >
-                        <Plus className="h-3 w-3" />
-                      </Button>
+                    <div className="pt-2">
+                      <div className="flex space-x-2">
+                        <Input
+                          value={newTaskInputs[note.id] || ''}
+                          onChange={(value) => setNewTaskInputs(prev => ({ ...prev, [note.id]: value }))}
+                          placeholder="Új feladat..."
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              handleAddTask(note.id);
+                            }
+                          }}
+                          className="flex-1"
+                        />
+                        <Button
+                          size="sm"
+                          onClick={() => handleAddTask(note.id)}
+                          disabled={!newTaskInputs[note.id]?.trim()}
+                          className="flex-shrink-0"
+                        >
+                          <Plus className="h-3 w-3" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>

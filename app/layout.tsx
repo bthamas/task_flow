@@ -34,6 +34,7 @@ export default function RootLayout({
                 color: '#fff',
               },
             }}
+            limit={1}
           />
         </Providers>
       </body>
