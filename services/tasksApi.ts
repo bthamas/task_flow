@@ -1,10 +1,5 @@
-import { createBrowserClient } from '@supabase/ssr';
+import { createClient } from '@/utils/supabase/client';
 import { Task } from '@/types';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-const supabase = createBrowserClient(supabaseUrl, supabaseKey);
 
 // Helper function to convert database format to frontend format
 const mapTaskFromDB = (dbTask: any, projectId?: string): Task => {
@@ -36,6 +31,12 @@ const mapTaskToDB = (task: Partial<Task>): any => ({
 
 export const tasksApi = {
   async getTasks(projectId?: string): Promise<Task[]> {
+    const supabase = createClient();
+    if (!supabase) {
+      console.warn('Supabase client not available during build');
+      return [];
+    }
+
     if (!projectId) {
       // If no projectId, return empty array for project tasks
       return [];
@@ -54,6 +55,12 @@ export const tasksApi = {
   },
 
   async getTask(id: string): Promise<Task> {
+    const supabase = createClient();
+    if (!supabase) {
+      console.warn('Supabase client not available during build');
+      throw new Error('Supabase client not available');
+    }
+
     const { data, error } = await supabase
       .from('tasks')
       .select('*')
@@ -65,6 +72,11 @@ export const tasksApi = {
   },
 
   async createTask(task: Omit<Task, 'id' | 'created_at' | 'updated_at'>, projectId?: string): Promise<Task> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     if (!projectId) {
       throw new Error('Project ID is required for creating tasks');
     }
@@ -99,6 +111,11 @@ export const tasksApi = {
   },
 
   async updateTask(id: string, updates: Partial<Task>): Promise<Task> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     const dbUpdates = mapTaskToDB(updates);
     const { data, error } = await supabase
       .from('tasks')
@@ -112,6 +129,11 @@ export const tasksApi = {
   },
 
   async deleteTask(id: string): Promise<void> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     const { error } = await supabase
       .from('tasks')
       .delete()
@@ -121,6 +143,11 @@ export const tasksApi = {
   },
 
   async reorderTasks(tasks: Task[]): Promise<void> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     // Update order_index for each task
     const updates = tasks.map((task, index) => ({
       id: task.id,
@@ -141,6 +168,11 @@ export const tasksApi = {
   },
 
   async toggleTaskComplete(id: string, isCompleted: boolean): Promise<Task> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     const { data, error } = await supabase
       .from('tasks')
       .update({ 

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { Project, Client, FilterType } from '@/types';
 
-export type Theme = 'default' | 'glass';
+export type Theme = 'default' | 'glass' | 'dark' | 'sunset' | 'ocean' | 'forest';
 
 interface AppState {
   // UI State

@@ -1,9 +1,4 @@
-import { createBrowserClient } from '@supabase/ssr';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-const supabase = createBrowserClient(supabaseUrl, supabaseKey);
+import { createClient } from '@/utils/supabase/client';
 
 export interface Note {
   id: string;
@@ -25,6 +20,9 @@ export interface SimpleTask {
 
 // Automatikus tábla létrehozó funkció
 const ensureTablesExist = async () => {
+  const supabase = createClient();
+  if (!supabase) return;
+
   try {
     // Próbáljuk meg létrehozni a notes táblát
     await supabase.rpc('create_notes_table_if_not_exists');
@@ -42,6 +40,64 @@ const ensureTablesExist = async () => {
 
 export const notesApi = {
   async getNotes(): Promise<Note[]> {
+    const supabase = createClient();
+    if (!supabase) {
+      console.warn('Supabase client not available during build');
+      // Return mock data during build
+      return [
+        {
+          id: 'mock-1',
+          title: 'Bevásárlás',
+          content: 'Heti bevásárlás listája',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          tasks: [
+            {
+              id: 'task-1',
+              title: 'Tej',
+              is_completed: true,
+              note_id: 'mock-1',
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            },
+            {
+              id: 'task-2',
+              title: 'Kenyér',
+              is_completed: false,
+              note_id: 'mock-1',
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            }
+          ]
+        },
+        {
+          id: 'mock-2',
+          title: 'Házimunka',
+          content: 'Heti házimunka feladatok',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          tasks: [
+            {
+              id: 'task-3',
+              title: 'Mosás',
+              is_completed: true,
+              note_id: 'mock-2',
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            },
+            {
+              id: 'task-4',
+              title: 'Takarítás',
+              is_completed: false,
+              note_id: 'mock-2',
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+            }
+          ]
+        }
+      ];
+    }
+
     try {
       // Get all notes with their tasks
       const { data: notes, error: notesError } = await supabase
@@ -193,6 +249,12 @@ export const notesApi = {
   },
 
   async getNote(id: string): Promise<Note> {
+    const supabase = createClient();
+    if (!supabase) {
+      console.warn('Supabase client not available during build');
+      throw new Error('Supabase client not available');
+    }
+
     try {
       const { data: note, error: noteError } = await supabase
         .from('notes')
@@ -230,6 +292,11 @@ export const notesApi = {
   },
 
   async createNote(note: Omit<Note, 'id' | 'created_at' | 'updated_at' | 'tasks'>): Promise<Note> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     try {
       const { data, error } = await supabase
         .from('notes')
@@ -274,6 +341,11 @@ export const notesApi = {
   },
 
   async updateNote(id: string, updates: Partial<Note>): Promise<Note> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     try {
       const { data, error } = await supabase
         .from('notes')
@@ -326,6 +398,11 @@ export const notesApi = {
   },
 
   async deleteNote(id: string): Promise<void> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     try {
       const { error } = await supabase
         .from('notes')
@@ -345,6 +422,11 @@ export const notesApi = {
   },
 
   async createSimpleTask(task: Omit<SimpleTask, 'id' | 'created_at' | 'updated_at'>): Promise<SimpleTask> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     try {
       const { data, error } = await supabase
         .from('simple_tasks')
@@ -386,6 +468,11 @@ export const notesApi = {
   },
 
   async updateSimpleTask(id: string, updates: Partial<SimpleTask>): Promise<SimpleTask> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     try {
       const { data, error } = await supabase
         .from('simple_tasks')
@@ -409,6 +496,11 @@ export const notesApi = {
   },
 
   async deleteSimpleTask(id: string): Promise<void> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     try {
       const { error } = await supabase
         .from('simple_tasks')
@@ -428,6 +520,11 @@ export const notesApi = {
   },
 
   async toggleSimpleTask(id: string, isCompleted: boolean): Promise<SimpleTask> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     try {
       const { data, error } = await supabase
         .from('simple_tasks')

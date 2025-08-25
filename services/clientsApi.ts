@@ -1,13 +1,14 @@
-import { createBrowserClient } from '@supabase/ssr';
+import { createClient } from '@/utils/supabase/client';
 import { Client } from '@/types';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-const supabase = createBrowserClient(supabaseUrl, supabaseKey);
 
 export const clientsApi = {
   async getClients(): Promise<Client[]> {
+    const supabase = createClient();
+    if (!supabase) {
+      console.warn('Supabase client not available during build');
+      return [];
+    }
+
     const { data, error } = await supabase
       .from('clients')
       .select('*')
@@ -21,6 +22,12 @@ export const clientsApi = {
   },
 
   async getClient(id: string): Promise<Client> {
+    const supabase = createClient();
+    if (!supabase) {
+      console.warn('Supabase client not available during build');
+      throw new Error('Supabase client not available');
+    }
+
     const { data, error } = await supabase
       .from('clients')
       .select('*')
@@ -35,6 +42,11 @@ export const clientsApi = {
   },
 
   async createClient(client: Omit<Client, 'id' | 'created_at' | 'updated_at'>): Promise<Client> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     // Convert camelCase to snake_case for database
     const dbClient = {
       name: client.name,
@@ -57,6 +69,11 @@ export const clientsApi = {
   },
 
   async updateClient(id: string, updates: Partial<Client>): Promise<Client> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     // Convert camelCase to snake_case for database
     const dbUpdates = {
       name: updates.name,
@@ -69,7 +86,6 @@ export const clientsApi = {
     const { data, error } = await supabase
       .from('clients')
       .update(dbUpdates)
-      .eq('id', id)
       .select()
       .single();
     
@@ -81,6 +97,11 @@ export const clientsApi = {
   },
 
   async deleteClient(id: string): Promise<void> {
+    const supabase = createClient();
+    if (!supabase) {
+      throw new Error('Supabase client not available');
+    }
+
     const { error } = await supabase
       .from('clients')
       .delete()

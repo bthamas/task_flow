@@ -8,7 +8,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Remove existing theme classes
-    document.documentElement.classList.remove('theme-default', 'theme-glass');
+    document.documentElement.classList.remove(
+      'theme-default', 
+      'theme-glass', 
+      'theme-dark', 
+      'theme-sunset', 
+      'theme-ocean', 
+      'theme-forest'
+    );
     
     // Add current theme class
     document.documentElement.classList.add(`theme-${currentTheme}`);

@@ -62,25 +62,82 @@ a {
   min-height: 100vh;
 }
 
-/* Glass Header */
-.theme-glass header {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow);
+/* Dark Theme Styles */
+.theme-dark {
+  --dark-bg: #0f172a;
+  --dark-surface: #1e293b;
+  --dark-surface-hover: #334155;
+  --dark-border: #334155;
+  --dark-text: #f1f5f9;
+  --dark-text-secondary: #94a3b8;
+  --dark-accent: #3b82f6;
+  --dark-accent-hover: #2563eb;
+  --dark-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.5);
 }
 
-/* Glass Sidebar */
-.theme-glass aside {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow);
+.theme-dark body {
+  background: var(--dark-bg);
+  color: var(--dark-text);
+  min-height: 100vh;
 }
 
-/* Glass Cards */
+/* Sunset Theme Styles */
+.theme-sunset {
+  --sunset-bg: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+  --sunset-surface: rgba(255, 255, 255, 0.15);
+  --sunset-surface-hover: rgba(255, 255, 255, 0.25);
+  --sunset-border: rgba(255, 255, 255, 0.3);
+  --sunset-text: #ffffff;
+  --sunset-text-secondary: rgba(255, 255, 255, 0.8);
+  --sunset-accent: #fbbf24;
+  --sunset-shadow: 0 10px 25px -3px rgba(251, 191, 36, 0.3);
+}
+
+.theme-sunset body {
+  background: var(--sunset-bg);
+  color: var(--sunset-text);
+  min-height: 100vh;
+}
+
+/* Ocean Theme Styles */
+.theme-ocean {
+  --ocean-bg: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+  --ocean-surface: rgba(255, 255, 255, 0.15);
+  --ocean-surface-hover: rgba(255, 255, 255, 0.25);
+  --ocean-border: rgba(255, 255, 255, 0.3);
+  --ocean-text: #ffffff;
+  --ocean-text-secondary: rgba(255, 255, 255, 0.8);
+  --ocean-accent: #22d3ee;
+  --ocean-shadow: 0 10px 25px -3px rgba(34, 211, 238, 0.3);
+}
+
+.theme-ocean body {
+  background: var(--ocean-bg);
+  color: var(--ocean-text);
+  min-height: 100vh;
+}
+
+/* Forest Theme Styles */
+.theme-forest {
+  --forest-bg: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --forest-surface: rgba(255, 255, 255, 0.15);
+  --forest-surface-hover: rgba(255, 255, 255, 0.25);
+  --forest-border: rgba(255, 255, 255, 0.3);
+  --forest-text: #ffffff;
+  --forest-text-secondary: rgba(255, 255, 255, 0.8);
+  --forest-accent: #34d399;
+  --forest-shadow: 0 10px 25px -3px rgba(52, 211, 153, 0.3);
+}
+
+.theme-forest body {
+  background: var(--forest-bg);
+  color: var(--forest-text);
+  min-height: 100vh;
+}
+
+/* Glass Theme Elements */
+.theme-glass header,
+.theme-glass aside,
 .theme-glass .bg-white,
 .theme-glass .bg-gray-50,
 .theme-glass .bg-gray-100 {
@@ -91,7 +148,6 @@ a {
   box-shadow: var(--glass-shadow);
 }
 
-/* Glass Buttons */
 .theme-glass button:not(.theme-toggle-btn) {
   background: var(--glass-bg) !important;
   backdrop-filter: var(--glass-backdrop);
@@ -107,23 +163,103 @@ a {
   box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
 }
 
-/* Theme Toggle Button - Keep original styling */
-.theme-glass .theme-toggle-btn {
-  background: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-  transform: none !important;
+/* Dark Theme Elements */
+.theme-dark header,
+.theme-dark aside,
+.theme-dark .bg-white,
+.theme-dark .bg-gray-50,
+.theme-dark .bg-gray-100 {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+  box-shadow: var(--dark-shadow);
 }
 
-.theme-glass .theme-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  transform: none !important;
-  box-shadow: none !important;
+.theme-dark button:not(.theme-toggle-btn) {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+  box-shadow: var(--dark-shadow);
+  transition: all 0.3s ease;
 }
 
-/* Glass Inputs */
+.theme-dark button:hover:not(.theme-toggle-btn) {
+  background: var(--dark-surface-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Sunset Theme Elements */
+.theme-sunset header,
+.theme-sunset aside,
+.theme-sunset .bg-white,
+.theme-sunset .bg-gray-50,
+.theme-sunset .bg-gray-100 {
+  background: var(--sunset-surface) !important;
+  border-color: var(--sunset-border) !important;
+  box-shadow: var(--sunset-shadow);
+}
+
+.theme-sunset button:not(.theme-toggle-btn) {
+  background: var(--sunset-surface) !important;
+  border-color: var(--sunset-border) !important;
+  box-shadow: var(--sunset-shadow);
+  transition: all 0.3s ease;
+}
+
+.theme-sunset button:hover:not(.theme-toggle-btn) {
+  background: var(--sunset-surface-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(251, 191, 36, 0.4);
+}
+
+/* Ocean Theme Elements */
+.theme-ocean header,
+.theme-ocean aside,
+.theme-ocean .bg-white,
+.theme-ocean .bg-gray-50,
+.theme-ocean .bg-gray-100 {
+  background: var(--ocean-surface) !important;
+  border-color: var(--ocean-border) !important;
+  box-shadow: var(--ocean-shadow);
+}
+
+.theme-ocean button:not(.theme-toggle-btn) {
+  background: var(--ocean-surface) !important;
+  border-color: var(--ocean-border) !important;
+  box-shadow: var(--ocean-shadow);
+  transition: all 0.3s ease;
+}
+
+.theme-ocean button:hover:not(.theme-toggle-btn) {
+  background: var(--ocean-surface-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(34, 211, 238, 0.4);
+}
+
+/* Forest Theme Elements */
+.theme-forest header,
+.theme-forest aside,
+.theme-forest .bg-white,
+.theme-forest .bg-gray-50,
+.theme-forest .bg-gray-100 {
+  background: var(--forest-surface) !important;
+  border-color: var(--forest-border) !important;
+  box-shadow: var(--forest-shadow);
+}
+
+.theme-forest button:not(.theme-toggle-btn) {
+  background: var(--forest-surface) !important;
+  border-color: var(--forest-border) !important;
+  box-shadow: var(--forest-shadow);
+  transition: all 0.3s ease;
+}
+
+.theme-forest button:hover:not(.theme-toggle-btn) {
+  background: var(--forest-surface-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(52, 211, 153, 0.4);
+}
+
+/* Input Styles for All Themes */
 .theme-glass input,
 .theme-glass textarea,
 .theme-glass select {
@@ -134,6 +270,43 @@ a {
   box-shadow: var(--glass-shadow);
 }
 
+.theme-dark input,
+.theme-dark textarea,
+.theme-dark select {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+  box-shadow: var(--dark-shadow);
+  color: var(--dark-text) !important;
+}
+
+.theme-sunset input,
+.theme-sunset textarea,
+.theme-sunset select {
+  background: var(--sunset-surface) !important;
+  border-color: var(--sunset-border) !important;
+  box-shadow: var(--sunset-shadow);
+  color: var(--sunset-text) !important;
+}
+
+.theme-ocean input,
+.theme-ocean textarea,
+.theme-ocean select {
+  background: var(--ocean-surface) !important;
+  border-color: var(--ocean-border) !important;
+  box-shadow: var(--ocean-shadow);
+  color: var(--ocean-text) !important;
+}
+
+.theme-forest input,
+.theme-forest textarea,
+.theme-forest select {
+  background: var(--forest-surface) !important;
+  border-color: var(--forest-border) !important;
+  box-shadow: var(--forest-shadow);
+  color: var(--forest-text) !important;
+}
+
+/* Focus States */
 .theme-glass input:focus,
 .theme-glass textarea:focus,
 .theme-glass select:focus {
@@ -142,182 +315,39 @@ a {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
-/* Glass Modals */
-.theme-glass .modal,
-.theme-glass .modal-content {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow);
+.theme-dark input:focus,
+.theme-dark textarea:focus,
+.theme-dark select:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: var(--dark-accent) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
-/* Glass Navigation */
-.theme-glass nav {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-}
-
-/* Glass Tables */
-.theme-glass table {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-}
-
-.theme-glass th,
-.theme-glass td {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-}
-
-/* Glass Forms */
-.theme-glass form {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-}
-
-/* Glass Lists */
-.theme-glass ul,
-.theme-glass ol {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-}
-
-.theme-glass li {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-}
-
-/* Glass Dropdowns */
-.theme-glass .dropdown,
-.theme-glass .dropdown-content {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow);
-}
-
-/* Glass Tooltips */
-.theme-glass .tooltip {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow);
-}
-
-/* Glass Alerts */
-.theme-glass .alert,
-.theme-glass .notification {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow);
-}
-
-/* Glass Progress Bars */
-.theme-glass .progress-bar,
-.theme-glass .progress {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-}
-
-/* Glass Badges */
-.theme-glass .badge {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow);
-}
-
-/* Glass Dividers */
-.theme-glass hr,
-.theme-glass .divider {
-  border-color: var(--glass-border) !important;
-  background: var(--glass-border) !important;
-}
-
-/* Glass Scrollbars */
-.theme-glass ::-webkit-scrollbar {
-  width: 8px;
-}
-
-.theme-glass ::-webkit-scrollbar-track {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-}
-
-.theme-glass ::-webkit-scrollbar-thumb {
-  background: var(--glass-border);
-  border-radius: 4px;
-}
-
-.theme-glass ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* Glass Animations */
-.theme-glass * {
-  transition: all 0.3s ease;
-}
-
-/* Glass Hover Effects */
-.theme-glass .hover\:bg-gray-50:hover {
+.theme-sunset input:focus,
+.theme-sunset textarea:focus,
+.theme-sunset select:focus {
   background: rgba(255, 255, 255, 0.2) !important;
+  border-color: var(--sunset-accent) !important;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
 }
 
-.theme-glass .hover\:bg-gray-100:hover {
-  background: rgba(255, 255, 255, 0.25) !important;
+.theme-ocean input:focus,
+.theme-ocean textarea:focus,
+.theme-ocean select:focus {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: var(--ocean-accent) !important;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
 }
 
-/* Glass Focus States */
-.theme-glass .focus\:ring-2:focus {
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1) !important;
+.theme-forest input:focus,
+.theme-forest textarea:focus,
+.theme-forest select:focus {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: var(--forest-accent) !important;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
 }
 
-/* Glass Active States */
-.theme-glass .active,
-.theme-glass .active\:bg-blue-600:active {
-  background: rgba(59, 130, 246, 0.3) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-}
-
-/* Glass Disabled States */
-.theme-glass .disabled,
-.theme-glass .opacity-50 {
-  opacity: 0.6 !important;
-  background: rgba(255, 255, 255, 0.05) !important;
-}
-
-/* Glass Loading States */
-.theme-glass .loading,
-.theme-glass .animate-pulse {
-  background: linear-gradient(90deg, var(--glass-bg) 25%, rgba(255, 255, 255, 0.1) 50%, var(--glass-bg) 75%) !important;
-  background-size: 200% 100% !important;
-  animation: glass-shimmer 1.5s infinite !important;
-}
-
-@keyframes glass-shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-/* Glass Text Colors */
+/* Text Colors for All Themes */
 .theme-glass .text-gray-600,
 .theme-glass .text-gray-700,
 .theme-glass .text-gray-800,
@@ -329,20 +359,433 @@ a {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
-.theme-glass .text-gray-400 {
-  color: rgba(255, 255, 255, 0.6) !important;
+.theme-dark .text-gray-600,
+.theme-dark .text-gray-700,
+.theme-dark .text-gray-800,
+.theme-dark .text-gray-900 {
+  color: var(--dark-text) !important;
 }
 
-/* Glass Border Colors */
+.theme-dark .text-gray-500 {
+  color: var(--dark-text-secondary) !important;
+}
+
+.theme-sunset .text-gray-600,
+.theme-sunset .text-gray-700,
+.theme-sunset .text-gray-800,
+.theme-sunset .text-gray-900 {
+  color: var(--sunset-text) !important;
+}
+
+.theme-sunset .text-gray-500 {
+  color: var(--sunset-text-secondary) !important;
+}
+
+.theme-ocean .text-gray-600,
+.theme-ocean .text-gray-700,
+.theme-ocean .text-gray-800,
+.theme-ocean .text-gray-900 {
+  color: var(--ocean-text) !important;
+}
+
+.theme-ocean .text-gray-500 {
+  color: var(--ocean-text-secondary) !important;
+}
+
+.theme-forest .text-gray-600,
+.theme-forest .text-gray-700,
+.theme-forest .text-gray-800,
+.theme-forest .text-gray-900 {
+  color: var(--forest-text) !important;
+}
+
+.theme-forest .text-gray-500 {
+  color: var(--forest-text-secondary) !important;
+}
+
+/* Border Colors for All Themes */
 .theme-glass .border-gray-200,
 .theme-glass .border-gray-300 {
   border-color: var(--glass-border) !important;
 }
 
-/* Glass Shadow Overrides */
+.theme-dark .border-gray-200,
+.theme-dark .border-gray-300 {
+  border-color: var(--dark-border) !important;
+}
+
+.theme-sunset .border-gray-200,
+.theme-sunset .border-gray-300 {
+  border-color: var(--sunset-border) !important;
+}
+
+.theme-ocean .border-gray-200,
+.theme-ocean .border-gray-300 {
+  border-color: var(--ocean-border) !important;
+}
+
+.theme-forest .border-gray-200,
+.theme-forest .border-gray-300 {
+  border-color: var(--forest-border) !important;
+}
+
+/* Shadow Overrides for All Themes */
 .theme-glass .shadow-sm,
 .theme-glass .shadow,
 .theme-glass .shadow-md,
 .theme-glass .shadow-lg {
   box-shadow: var(--glass-shadow) !important;
+}
+
+.theme-dark .shadow-sm,
+.theme-dark .shadow,
+.theme-dark .shadow-md,
+.theme-dark .shadow-lg {
+  box-shadow: var(--dark-shadow) !important;
+}
+
+.theme-sunset .shadow-sm,
+.theme-sunset .shadow,
+.theme-sunset .shadow-md,
+.theme-sunset .shadow-lg {
+  box-shadow: var(--sunset-shadow) !important;
+}
+
+.theme-ocean .shadow-sm,
+.theme-ocean .shadow,
+.theme-ocean .shadow-md,
+.theme-ocean .shadow-lg {
+  box-shadow: var(--ocean-shadow) !important;
+}
+
+.theme-forest .shadow-sm,
+.theme-forest .shadow,
+.theme-forest .shadow-md,
+.theme-forest .shadow-lg {
+  box-shadow: var(--forest-shadow) !important;
+}
+
+/* Theme Toggle Button - Keep original styling */
+.theme-glass .theme-toggle-btn,
+.theme-dark .theme-toggle-btn,
+.theme-sunset .theme-toggle-btn,
+.theme-ocean .theme-toggle-btn,
+.theme-forest .theme-toggle-btn {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.theme-glass .theme-toggle-btn:hover,
+.theme-dark .theme-toggle-btn:hover,
+.theme-sunset .theme-toggle-btn:hover,
+.theme-ocean .theme-toggle-btn:hover,
+.theme-forest .theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Hover Effects for All Themes */
+.theme-dark .hover\:bg-gray-50:hover {
+  background: var(--dark-surface-hover) !important;
+}
+
+.theme-sunset .hover\:bg-gray-50:hover {
+  background: var(--sunset-surface-hover) !important;
+}
+
+.theme-ocean .hover\:bg-gray-50:hover {
+  background: var(--ocean-surface-hover) !important;
+}
+
+.theme-forest .hover\:bg-gray-50:hover {
+  background: var(--forest-surface-hover) !important;
+}
+
+.theme-dark .hover\:bg-gray-100:hover {
+  background: var(--dark-surface-hover) !important;
+}
+
+.theme-sunset .hover\:bg-gray-100:hover {
+  background: var(--sunset-surface-hover) !important;
+}
+
+.theme-ocean .hover\:bg-gray-100:hover {
+  background: var(--ocean-surface-hover) !important;
+}
+
+.theme-forest .hover\:bg-gray-100:hover {
+  background: var(--forest-surface-hover) !important;
+}
+
+/* Focus States for All Themes */
+.theme-dark .focus\:ring-2:focus,
+.theme-sunset .focus\:ring-2:focus,
+.theme-ocean .focus\:ring-2:focus,
+.theme-forest .focus\:ring-2:focus {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Active States for All Themes */
+.theme-dark .active,
+.theme-dark .active\:bg-blue-600:active,
+.theme-sunset .active,
+.theme-sunset .active\:bg-blue-600:active,
+.theme-ocean .active,
+.theme-ocean .active\:bg-blue-600:active,
+.theme-forest .active,
+.theme-forest .active\:bg-blue-600:active {
+  background: rgba(59, 130, 246, 0.3) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Disabled States for All Themes */
+.theme-dark .disabled,
+.theme-dark .opacity-50,
+.theme-sunset .disabled,
+.theme-sunset .opacity-50,
+.theme-ocean .disabled,
+.theme-ocean .opacity-50,
+.theme-forest .disabled,
+.theme-forest .opacity-50 {
+  opacity: 0.6 !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Loading States for All Themes */
+.theme-dark .loading,
+.theme-dark .animate-pulse,
+.theme-sunset .loading,
+.theme-sunset .animate-pulse,
+.theme-ocean .loading,
+.theme-ocean .animate-pulse,
+.theme-forest .loading,
+.theme-forest .animate-pulse {
+  background: linear-gradient(90deg, var(--dark-surface) 25%, rgba(255, 255, 255, 0.1) 50%, var(--dark-surface) 75%) !important;
+  background-size: 200% 100% !important;
+  animation: theme-shimmer 1.5s infinite !important;
+}
+
+@keyframes theme-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Scrollbars for All Themes */
+.theme-dark ::-webkit-scrollbar,
+.theme-sunset ::-webkit-scrollbar,
+.theme-ocean ::-webkit-scrollbar,
+.theme-forest ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.theme-dark ::-webkit-scrollbar-track,
+.theme-sunset ::-webkit-scrollbar-track,
+.theme-ocean ::-webkit-scrollbar-track,
+.theme-forest ::-webkit-scrollbar-track {
+  background: var(--dark-surface, var(--sunset-surface, var(--ocean-surface, var(--forest-surface)));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.theme-dark ::-webkit-scrollbar-thumb,
+.theme-sunset ::-webkit-scrollbar-thumb,
+.theme-ocean ::-webkit-scrollbar-thumb,
+.theme-forest ::-webkit-scrollbar-thumb {
+  background: var(--dark-border, var(--sunset-border, var(--ocean-border, var(--forest-border)));
+  border-radius: 4px;
+}
+
+.theme-dark ::-webkit-scrollbar-thumb:hover,
+.theme-sunset ::-webkit-scrollbar-thumb:hover,
+.theme-ocean ::-webkit-scrollbar-thumb:hover,
+.theme-forest ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Animations for All Themes */
+.theme-dark *,
+.theme-sunset *,
+.theme-ocean *,
+.theme-forest * {
+  transition: all 0.3s ease;
+}
+
+/* Premium Card Enhancements */
+.theme-dark .bg-white {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  box-shadow: var(--dark-shadow) !important;
+}
+
+.theme-sunset .bg-white {
+  background: var(--sunset-surface) !important;
+  border: 1px solid var(--sunset-border) !important;
+  box-shadow: var(--sunset-shadow) !important;
+}
+
+.theme-ocean .bg-white {
+  background: var(--ocean-surface) !important;
+  border: 1px solid var(--ocean-border) !important;
+  box-shadow: var(--ocean-shadow) !important;
+}
+
+.theme-forest .bg-white {
+  background: var(--forest-surface) !important;
+  border: 1px solid var(--forest-border) !important;
+  box-shadow: var(--forest-shadow) !important;
+}
+
+/* Premium Button Enhancements */
+.theme-dark .bg-blue-600 {
+  background: var(--dark-accent) !important;
+  border-color: var(--dark-accent) !important;
+}
+
+.theme-sunset .bg-blue-600 {
+  background: var(--sunset-accent) !important;
+  border-color: var(--sunset-accent) !important;
+}
+
+.theme-ocean .bg-blue-600 {
+  background: var(--ocean-accent) !important;
+  border-color: var(--ocean-accent) !important;
+}
+
+.theme-forest .bg-blue-600 {
+  background: var(--forest-accent) !important;
+  border-color: var(--forest-accent) !important;
+}
+
+.theme-dark .bg-blue-600:hover {
+  background: var(--dark-accent-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px -3px rgba(0, 0, 0, 0.3);
+}
+
+.theme-sunset .bg-blue-600:hover {
+  background: var(--sunset-accent) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px -3px rgba(251, 191, 36, 0.3);
+}
+
+.theme-ocean .bg-blue-600:hover {
+  background: var(--ocean-accent) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px -3px rgba(34, 211, 238, 0.3);
+}
+
+.theme-forest .bg-blue-600:hover {
+  background: var(--forest-accent) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px -3px rgba(52, 211, 153, 0.3);
+}
+
+/* Premium Form Enhancements */
+.theme-dark .bg-gray-50 {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+
+.theme-sunset .bg-gray-50 {
+  background: var(--sunset-surface) !important;
+  border-color: var(--sunset-border) !important;
+}
+
+.theme-ocean .bg-gray-50 {
+  background: var(--ocean-surface) !important;
+  border-color: var(--ocean-border) !important;
+}
+
+.theme-forest .bg-gray-50 {
+  background: var(--forest-surface) !important;
+  border-color: var(--forest-border) !important;
+}
+
+/* Premium Table Enhancements */
+.theme-dark table,
+.theme-sunset table,
+.theme-ocean table,
+.theme-forest table {
+  background: var(--dark-surface, var(--sunset-surface, var(--ocean-surface, var(--forest-surface))) !important;
+  border-color: var(--dark-border, var(--sunset-border, var(--ocean-border, var(--forest-border))) !important;
+}
+
+.theme-dark th,
+.theme-dark td,
+.theme-sunset th,
+.theme-sunset td,
+.theme-ocean th,
+.theme-ocean td,
+.theme-forest th,
+.theme-forest td {
+  background: var(--dark-surface, var(--sunset-surface, var(--ocean-surface, var(--forest-surface))) !important;
+  border-color: var(--dark-border, var(--sunset-border, var(--ocean-border, var(--forest-border))) !important;
+  color: var(--dark-text, var(--sunset-text, var(--ocean-text, var(--forest-text))) !important;
+}
+
+/* Premium Navigation Enhancements */
+.theme-dark nav,
+.theme-sunset nav,
+.theme-ocean nav,
+.theme-forest nav {
+  background: var(--dark-surface, var(--sunset-surface, var(--ocean-surface, var(--forest-surface))) !important;
+  border-color: var(--dark-border, var(--sunset-border, var(--ocean-border, var(--forest-border))) !important;
+}
+
+/* Premium Modal Enhancements */
+.theme-dark .modal,
+.theme-dark .modal-content,
+.theme-sunset .modal,
+.theme-sunset .modal-content,
+.theme-ocean .modal,
+.theme-ocean .modal-content,
+.theme-forest .modal,
+.theme-forest .modal-content {
+  background: var(--dark-surface, var(--sunset-surface, var(--ocean-surface, var(--forest-surface))) !important;
+  border-color: var(--dark-border, var(--sunset-border, var(--ocean-border, var(--forest-border))) !important;
+  box-shadow: var(--dark-shadow, var(--sunset-shadow, var(--ocean-shadow, var(--forest-shadow))) !important;
+}
+
+/* Premium Dropdown Enhancements */
+.theme-dark .dropdown,
+.theme-dark .dropdown-content,
+.theme-sunset .dropdown,
+.theme-sunset .dropdown-content,
+.theme-ocean .dropdown,
+.theme-ocean .dropdown-content,
+.theme-forest .dropdown,
+.theme-forest .dropdown-content {
+  background: var(--dark-surface, var(--sunset-surface, var(--ocean-surface, var(--forest-surface))) !important;
+  border-color: var(--dark-border, var(--sunset-border, var(--ocean-border, var(--forest-border))) !important;
+  box-shadow: var(--dark-shadow, var(--sunset-shadow, var(--ocean-shadow, var(--forest-shadow))) !important;
+}
+
+/* Premium Badge Enhancements */
+.theme-dark .badge,
+.theme-sunset .badge,
+.theme-ocean .badge,
+.theme-forest .badge {
+  background: var(--dark-surface, var(--sunset-surface, var(--ocean-surface, var(--forest-surface))) !important;
+  border-color: var(--dark-border, var(--sunset-border, var(--ocean-border, var(--forest-border))) !important;
+  box-shadow: var(--dark-shadow, var(--sunset-shadow, var(--ocean-shadow, var(--forest-shadow))) !important;
+}
+
+/* Premium Alert Enhancements */
+.theme-dark .alert,
+.theme-dark .notification,
+.theme-sunset .alert,
+.theme-sunset .notification,
+.theme-ocean .alert,
+.theme-ocean .notification,
+.theme-forest .alert,
+.theme-forest .notification {
+  background: var(--dark-surface, var(--sunset-surface, var(--ocean-surface, var(--forest-surface))) !important;
+  border-color: var(--dark-border, var(--sunset-border, var(--ocean-border, var(--forest-border))) !important;
+  box-shadow: var(--dark-shadow, var(--sunset-shadow, var(--ocean-shadow, var(--forest-shadow))) !important;
 }
