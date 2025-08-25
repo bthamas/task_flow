@@ -40,12 +40,12 @@ export function Sidebar() {
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
         <div className="flex h-16 items-center justify-between px-6 border-b border-gray-200">
-          <div className="flex items-center">
+          <Link href="/dashboard" className="flex items-center hover:opacity-80 transition-opacity">
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">T</span>
             </div>
             <h1 className="ml-3 text-xl font-bold text-gray-900">TaskFlow</h1>
-          </div>
+          </Link>
           <Button
             variant="ghost"
             size="sm"

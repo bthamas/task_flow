@@ -3,7 +3,6 @@
 import { useAppStore } from '@/stores/useAppStore';
 import { Menu, Bell, User } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export function Header() {
   const { setSidebarOpen } = useAppStore();
@@ -26,7 +25,6 @@ export function Header() {
           <Button variant="ghost" size="sm">
             <Bell className="h-5 w-5" />
           </Button>
-          <ThemeToggle />
           <Button variant="ghost" size="sm">
             <User className="h-5 w-5" />
           </Button>
