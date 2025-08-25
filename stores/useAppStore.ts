@@ -1,11 +1,14 @@
 import { create } from 'zustand';
 import { Project, Client, FilterType } from '@/types';
 
+export type Theme = 'default' | 'glass';
+
 interface AppState {
   // UI State
   sidebarOpen: boolean;
   currentProject: Project | null;
   currentClient: Client | null;
+  currentTheme: Theme;
   
   // Filters and Search
   searchTerm: string;
@@ -17,12 +20,14 @@ interface AppState {
   setCurrentClient: (client: Client | null) => void;
   setSearchTerm: (term: string) => void;
   setActiveFilter: (filter: FilterType) => void;
+  setCurrentTheme: (theme: Theme) => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
   sidebarOpen: true,
   currentProject: null,
   currentClient: null,
+  currentTheme: 'default',
   searchTerm: '',
   activeFilter: 'all',
   
@@ -31,4 +36,5 @@ export const useAppStore = create<AppState>((set) => ({
   setCurrentClient: (client) => set({ currentClient: client }),
   setSearchTerm: (term) => set({ searchTerm: term }),
   setActiveFilter: (filter) => set({ activeFilter: filter }),
+  setCurrentTheme: (theme) => set({ currentTheme: theme }),
 }));

@@ -48,3 +48,301 @@ a {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* Glass Theme Styles */
+.theme-glass {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --glass-backdrop: blur(16px);
+}
+
+.theme-glass body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+/* Glass Header */
+.theme-glass header {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Glass Sidebar */
+.theme-glass aside {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Glass Cards */
+.theme-glass .bg-white,
+.theme-glass .bg-gray-50,
+.theme-glass .bg-gray-100 {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Glass Buttons */
+.theme-glass button:not(.theme-toggle-btn) {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+}
+
+.theme-glass button:hover:not(.theme-toggle-btn) {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
+}
+
+/* Theme Toggle Button - Keep original styling */
+.theme-glass .theme-toggle-btn {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.theme-glass .theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Glass Inputs */
+.theme-glass input,
+.theme-glass textarea,
+.theme-glass select {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+.theme-glass input:focus,
+.theme-glass textarea:focus,
+.theme-glass select:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+/* Glass Modals */
+.theme-glass .modal,
+.theme-glass .modal-content {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Glass Navigation */
+.theme-glass nav {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+}
+
+/* Glass Tables */
+.theme-glass table {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+}
+
+.theme-glass th,
+.theme-glass td {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+}
+
+/* Glass Forms */
+.theme-glass form {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+}
+
+/* Glass Lists */
+.theme-glass ul,
+.theme-glass ol {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+}
+
+.theme-glass li {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+}
+
+/* Glass Dropdowns */
+.theme-glass .dropdown,
+.theme-glass .dropdown-content {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Glass Tooltips */
+.theme-glass .tooltip {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Glass Alerts */
+.theme-glass .alert,
+.theme-glass .notification {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Glass Progress Bars */
+.theme-glass .progress-bar,
+.theme-glass .progress {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+}
+
+/* Glass Badges */
+.theme-glass .badge {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Glass Dividers */
+.theme-glass hr,
+.theme-glass .divider {
+  border-color: var(--glass-border) !important;
+  background: var(--glass-border) !important;
+}
+
+/* Glass Scrollbars */
+.theme-glass ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.theme-glass ::-webkit-scrollbar-track {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+}
+
+.theme-glass ::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 4px;
+}
+
+.theme-glass ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Glass Animations */
+.theme-glass * {
+  transition: all 0.3s ease;
+}
+
+/* Glass Hover Effects */
+.theme-glass .hover\:bg-gray-50:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.theme-glass .hover\:bg-gray-100:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Glass Focus States */
+.theme-glass .focus\:ring-2:focus {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Glass Active States */
+.theme-glass .active,
+.theme-glass .active\:bg-blue-600:active {
+  background: rgba(59, 130, 246, 0.3) !important;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+}
+
+/* Glass Disabled States */
+.theme-glass .disabled,
+.theme-glass .opacity-50 {
+  opacity: 0.6 !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Glass Loading States */
+.theme-glass .loading,
+.theme-glass .animate-pulse {
+  background: linear-gradient(90deg, var(--glass-bg) 25%, rgba(255, 255, 255, 0.1) 50%, var(--glass-bg) 75%) !important;
+  background-size: 200% 100% !important;
+  animation: glass-shimmer 1.5s infinite !important;
+}
+
+@keyframes glass-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Glass Text Colors */
+.theme-glass .text-gray-600,
+.theme-glass .text-gray-700,
+.theme-glass .text-gray-800,
+.theme-glass .text-gray-900 {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.theme-glass .text-gray-500 {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.theme-glass .text-gray-400 {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Glass Border Colors */
+.theme-glass .border-gray-200,
+.theme-glass .border-gray-300 {
+  border-color: var(--glass-border) !important;
+}
+
+/* Glass Shadow Overrides */
+.theme-glass .shadow-sm,
+.theme-glass .shadow,
+.theme-glass .shadow-md,
+.theme-glass .shadow-lg {
+  box-shadow: var(--glass-shadow) !important;
+}
