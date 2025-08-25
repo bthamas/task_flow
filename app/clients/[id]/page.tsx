@@ -122,6 +122,14 @@ const getProgressBorderColor = (progress: number) => {
   return 'border-green-500';
 };
 
+const getProgressCardClass = (progress: number) => {
+  if (progress === 0) return 'card-progress-gray';
+  if (progress < 34) return 'card-progress-red';
+  if (progress < 67) return 'card-progress-orange';
+  if (progress < 100) return 'card-progress-yellow';
+  return 'card-progress-green';
+};
+
 // Use the progress_percentage from the database instead of calculating it
 const getProjectProgress = (project: Project): number => {
   return project.progress_percentage || 0;
@@ -337,7 +345,7 @@ export default function ClientDetailPage() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Client Info */}
-            <Card>
+            <Card className="border-l-4 border-purple-500">
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -354,21 +362,53 @@ export default function ClientDetailPage() {
                     <Mail className="h-5 w-5 text-gray-400" />
                     <div>
                       <p className="text-sm font-medium text-gray-900">Email</p>
-                      <p className="text-sm text-gray-600">{client.email || 'Nincs megadva'}</p>
+                      {client.email ? (
+                        <button
+                          onClick={() => window.open(`mailto:${client.email}`, '_blank')}
+                          className="text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer"
+                        >
+                          {client.email}
+                        </button>
+                      ) : (
+                        <p className="text-sm text-gray-600">Nincs megadva</p>
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Phone className="h-5 w-5 text-gray-400" />
                     <div>
                       <p className="text-sm font-medium text-gray-900">Telefon</p>
-                      <p className="text-sm text-gray-600">{client.phone || 'Nincs megadva'}</p>
+                      {client.phone ? (
+                        <button
+                          onClick={() => window.open(`tel:${client.phone}`, '_blank')}
+                          className="text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer"
+                        >
+                          {client.phone}
+                        </button>
+                      ) : (
+                        <p className="text-sm text-gray-600">Nincs megadva</p>
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center space-x-3 md:col-span-2">
                     <MapPin className="h-5 w-5 text-gray-400" />
                     <div>
                       <p className="text-sm font-medium text-gray-900">Cím</p>
-                      <p className="text-sm text-gray-600">{client.address || 'Nincs megadva'}</p>
+                      {client.address ? (
+                        <button
+                          onClick={() => {
+                            if (typeof client.address === 'string') {
+                              const encodedAddress = encodeURIComponent(client.address);
+                              window.open(`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`, '_blank');
+                            }
+                          }}
+                          className="text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer"
+                        >
+                          {client.address}
+                        </button>
+                      ) : (
+                        <p className="text-sm text-gray-600">Nincs megadva</p>
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -415,7 +455,7 @@ export default function ClientDetailPage() {
                       key={project.id}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className={`p-4 border-l-4 ${getProgressBorderColor(project.progress_percentage || 0)} bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer`}
+                      className={`p-4 rounded-lg transition-colors cursor-pointer ${getProgressCardClass(project.progress_percentage || 0)} hover:shadow-lg`}
                       onClick={() => router.push(`/projects/${project.id}`)}
                     >
                       <div className="flex items-start justify-between">
@@ -496,13 +536,48 @@ export default function ClientDetailPage() {
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Gyors műveletek</h3>
               
               <div className="space-y-3">
-                <Button variant="outline" size="sm" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => {
+                    if (client?.email) {
+                      window.open(`mailto:${client.email}`, '_blank');
+                    }
+                  }}
+                  disabled={!client?.email}
+                >
                   <Mail className="h-4 w-4 mr-2" />
                   Email küldése
                 </Button>
-                <Button variant="outline" size="sm" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => {
+                    if (client?.phone) {
+                      window.open(`tel:${client.phone}`, '_blank');
+                    }
+                  }}
+                  disabled={!client?.phone}
+                >
                   <Phone className="h-4 w-4 mr-2" />
                   Hívás
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => {
+                    if (client?.address && typeof client.address === 'string') {
+                      const encodedAddress = encodeURIComponent(client.address);
+                      window.open(`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`, '_blank');
+                    }
+                  }}
+                  disabled={!client?.address}
+                >
+                  <MapPin className="h-4 w-4 mr-2" />
+                  Google Maps
                 </Button>
                 <Button 
                   variant="outline" 

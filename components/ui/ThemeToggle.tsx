@@ -22,11 +22,7 @@ export function ThemeToggle() {
 
   const themes = [
     { id: 'default', name: 'Alapértelmezett', description: 'Klasszikus világos kinézet', icon: Palette, color: '#6b7280' },
-    { id: 'glass', name: 'Üveg', description: 'Modern üveg hatású design', icon: Sparkles, color: '#8b5cf6' },
-    { id: 'dark', name: 'Sötét', description: 'Elegáns sötét mód', icon: Moon, color: '#1e293b' },
-    { id: 'sunset', name: 'Naplemente', description: 'Meleg naplemente színek', icon: Sun, color: '#f97316' },
-    { id: 'ocean', name: 'Óceán', description: 'Tengeri kék árnyalatok', icon: Waves, color: '#06b6d4' },
-    { id: 'forest', name: 'Erdő', description: 'Természetes zöld tónusok', icon: TreePine, color: '#10b981' }
+    { id: 'dark', name: 'Sötét', description: 'Elegáns sötét mód', icon: Moon, color: '#1e293b' }
   ];
 
   const currentThemeData = themes.find(theme => theme.id === currentTheme);

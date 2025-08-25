@@ -144,7 +144,7 @@ export default function ClientsPage() {
               size="sm"
               onClick={() => setIsCreateModalOpen(true)}
             >
-              <Plus className="h-4 w-4 mr-2" />
+              <Plus className="h-5 w-5 mr-2" />
               Új Ügyfél
             </Button>
           </div>
@@ -195,7 +195,7 @@ export default function ClientsPage() {
                         router.push(`/clients/${client.id}?edit=true`);
                       }}
                     >
-                      <Edit className="h-4 w-4" />
+                      <Edit className="h-5 w-5" />
                     </Button>
                   </div>
                   
@@ -211,7 +211,7 @@ export default function ClientsPage() {
                         }
                       }}
                     >
-                      <Mail className="h-4 w-4 mr-1" />
+                      <Mail className="h-5 w-5 mr-1" />
                       Email
                     </Button>
                     <Button 
@@ -225,7 +225,7 @@ export default function ClientsPage() {
                         }
                       }}
                     >
-                      <Phone className="h-4 w-4 mr-1" />
+                      <Phone className="h-5 w-5 mr-1" />
                       Hívás
                     </Button>
                   </div>

@@ -12,11 +12,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // Remove existing theme classes
     document.documentElement.classList.remove(
       'theme-default', 
-      'theme-glass', 
-      'theme-dark', 
-      'theme-sunset', 
-      'theme-ocean', 
-      'theme-forest'
+      'theme-dark'
     );
     
     // Add current theme class

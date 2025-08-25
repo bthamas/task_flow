@@ -62,7 +62,7 @@ a {
   min-height: 100vh;
 }
 
-/* Dark Theme Styles */
+/* Dark Theme Styles - Enhanced and Comprehensive */
 .theme-dark {
   --dark-bg: #0f172a;
   --dark-surface: #1e293b;
@@ -73,100 +73,29 @@ a {
   --dark-accent: #3b82f6;
   --dark-accent-hover: #2563eb;
   --dark-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.5);
+  --dark-card-bg: #1e293b;
+  --dark-card-border: #334155;
+  --dark-input-bg: #334155;
+  --dark-input-border: #475569;
+  --dark-button-bg: #334155;
+  --dark-button-hover: #475569;
+  --dark-progress-bg: #475569;
+  --dark-progress-fill: #3b82f6;
+}
+
+.theme-dark,
+.theme-dark html {
+  background: var(--dark-bg) !important;
+  color: var(--dark-text) !important;
 }
 
 .theme-dark body {
-  background: var(--dark-bg);
-  color: var(--dark-text);
+  background: var(--dark-bg) !important;
+  color: var(--dark-text) !important;
   min-height: 100vh;
 }
 
-/* Sunset Theme Styles */
-.theme-sunset {
-  --sunset-bg: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
-  --sunset-surface: rgba(255, 255, 255, 0.15);
-  --sunset-surface-hover: rgba(255, 255, 255, 0.25);
-  --sunset-border: rgba(255, 255, 255, 0.3);
-  --sunset-text: #ffffff;
-  --sunset-text-secondary: rgba(255, 255, 255, 0.8);
-  --sunset-accent: #fbbf24;
-  --sunset-shadow: 0 10px 25px -3px rgba(251, 191, 36, 0.3);
-}
-
-.theme-sunset body {
-  background: var(--sunset-bg);
-  color: var(--sunset-text);
-  min-height: 100vh;
-}
-
-/* Ocean Theme Styles */
-.theme-ocean {
-  --ocean-bg: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
-  --ocean-surface: rgba(255, 255, 255, 0.15);
-  --ocean-surface-hover: rgba(255, 255, 255, 0.25);
-  --ocean-border: rgba(255, 255, 255, 0.3);
-  --ocean-text: #ffffff;
-  --ocean-text-secondary: rgba(255, 255, 255, 0.8);
-  --ocean-accent: #22d3ee;
-  --ocean-shadow: 0 10px 25px -3px rgba(34, 211, 238, 0.3);
-}
-
-.theme-ocean body {
-  background: var(--ocean-bg);
-  color: var(--ocean-text);
-  min-height: 100vh;
-}
-
-/* Forest Theme Styles */
-.theme-forest {
-  --forest-bg: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  --forest-surface: rgba(255, 255, 255, 0.15);
-  --forest-surface-hover: rgba(255, 255, 255, 0.25);
-  --forest-border: rgba(255, 255, 255, 0.3);
-  --forest-text: #ffffff;
-  --forest-text-secondary: rgba(255, 255, 255, 0.8);
-  --forest-accent: #34d399;
-  --forest-shadow: 0 10px 25px -3px rgba(52, 211, 153, 0.3);
-}
-
-.theme-forest body {
-  background: var(--forest-bg);
-  color: var(--forest-text);
-  min-height: 100vh;
-}
-
-/* Glass Theme Elements */
-.theme-glass header,
-.theme-glass aside,
-.theme-glass .bg-white,
-.theme-glass .bg-gray-50,
-.theme-glass .bg-gray-100,
-.theme-glass .MainLayout,
-.theme-glass .Sidebar,
-.theme-glass .Header {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow);
-}
-
-.theme-glass button:not(.theme-toggle-btn) {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow);
-  transition: all 0.3s ease;
-}
-
-.theme-glass button:hover:not(.theme-toggle-btn) {
-  background: rgba(255, 255, 255, 0.2) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
-}
-
-/* Dark Theme Elements */
+/* Dark Theme Elements - Comprehensive Coverage */
 .theme-dark header,
 .theme-dark aside,
 .theme-dark .bg-white,
@@ -180,276 +109,116 @@ a {
   box-shadow: var(--dark-shadow);
 }
 
+.theme-dark .bg-gray-50,
+.theme-dark .bg-gray-100,
+.theme-dark .bg-white {
+  background: var(--dark-card-bg) !important;
+}
+
+.theme-dark .Card,
+.theme-dark .card,
+.theme-dark [class*="card"] {
+  background: var(--dark-card-bg) !important;
+  border: 1px solid var(--dark-card-border) !important;
+  box-shadow: var(--dark-shadow);
+}
+
 .theme-dark button:not(.theme-toggle-btn) {
-  background: var(--dark-surface) !important;
+  background: var(--dark-button-bg) !important;
   border-color: var(--dark-border) !important;
   box-shadow: var(--dark-shadow);
   transition: all 0.3s ease;
 }
 
 .theme-dark button:hover:not(.theme-toggle-btn) {
-  background: var(--dark-surface-hover) !important;
+  background: var(--dark-button-hover) !important;
   transform: translateY(-2px);
   box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
 }
 
-/* Sunset Theme Elements */
-.theme-sunset header,
-.theme-sunset aside,
-.theme-sunset .bg-white,
-.theme-sunset .bg-gray-50,
-.theme-sunset .bg-gray-100,
-.theme-sunset .MainLayout,
-.theme-sunset .Sidebar,
-.theme-sunset .Header {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-  box-shadow: var(--sunset-shadow);
-}
-
-.theme-sunset button:not(.theme-toggle-btn) {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-  box-shadow: var(--sunset-shadow);
-  transition: all 0.3s ease;
-}
-
-.theme-sunset button:hover:not(.theme-toggle-btn) {
-  background: var(--sunset-surface-hover) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px 0 rgba(251, 191, 36, 0.4);
-}
-
-/* Ocean Theme Elements */
-.theme-ocean header,
-.theme-ocean aside,
-.theme-ocean .bg-white,
-.theme-ocean .bg-gray-50,
-.theme-ocean .bg-gray-100,
-.theme-ocean .MainLayout,
-.theme-ocean .Sidebar,
-.theme-ocean .Header {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-  box-shadow: var(--ocean-shadow);
-}
-
-.theme-ocean button:not(.theme-toggle-btn) {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-  box-shadow: var(--ocean-shadow);
-  transition: all 0.3s ease;
-}
-
-.theme-ocean button:hover:not(.theme-toggle-btn) {
-  background: var(--ocean-surface-hover) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px 0 rgba(34, 211, 238, 0.4);
-}
-
-/* Forest Theme Elements */
-.theme-forest header,
-.theme-forest aside,
-.theme-forest .bg-white,
-.theme-forest .bg-gray-50,
-.theme-forest .bg-gray-100,
-.theme-forest .MainLayout,
-.theme-forest .Sidebar,
-.theme-forest .Header {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-  box-shadow: var(--forest-shadow);
-}
-
-.theme-forest button:not(.theme-toggle-btn) {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-  box-shadow: var(--forest-shadow);
-  transition: all 0.3s ease;
-}
-
-.theme-forest button:hover:not(.theme-toggle-btn) {
-  background: var(--forest-surface-hover) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px 0 rgba(52, 211, 153, 0.4);
-}
-
-/* Input Styles for All Themes */
-.theme-glass input,
-.theme-glass textarea,
-.theme-glass select {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow);
-}
-
-.theme-dark input,
-.theme-dark textarea,
-.theme-dark select {
-  background: var(--dark-surface) !important;
-  border-color: var(--dark-border) !important;
-  box-shadow: var(--dark-shadow);
+/* Dark Theme Text and Typography */
+.theme-dark .text-gray-900,
+.theme-dark .text-gray-800,
+.theme-dark .text-gray-700,
+.theme-dark .text-gray-600,
+.theme-dark .text-gray-500,
+.theme-dark h1,
+.theme-dark h2,
+.theme-dark h3,
+.theme-dark p,
+.theme-dark span,
+.theme-dark label {
   color: var(--dark-text) !important;
 }
 
-.theme-sunset input,
-.theme-sunset textarea,
-.theme-sunset select {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-  box-shadow: var(--sunset-shadow);
-  color: var(--sunset-text) !important;
+.theme-dark .text-gray-400,
+.theme-dark .text-gray-300 {
+  color: var(--dark-text-secondary) !important;
 }
 
-.theme-ocean input,
-.theme-ocean textarea,
-.theme-ocean select {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-  box-shadow: var(--ocean-shadow);
-  color: var(--ocean-text) !important;
+.theme-dark .text-blue-600 {
+  color: #60a5fa !important;
 }
 
-.theme-forest input,
-.theme-forest textarea,
-.theme-forest select {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-  box-shadow: var(--forest-shadow);
-  color: var(--forest-text) !important;
+.theme-dark .text-green-600 {
+  color: #4ade80 !important;
 }
 
-/* Focus States */
-.theme-glass input:focus,
-.theme-glass textarea:focus,
-.theme-glass select:focus {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: rgba(255, 255, 255, 0.4) !important;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+.theme-dark .text-red-600 {
+  color: #f87171 !important;
+}
+
+/* Dark Theme Inputs and Forms */
+.theme-dark input,
+.theme-dark textarea,
+.theme-dark select {
+  background: var(--dark-input-bg) !important;
+  border-color: var(--dark-input-border) !important;
+  color: var(--dark-text) !important;
 }
 
 .theme-dark input:focus,
 .theme-dark textarea:focus,
 .theme-dark select:focus {
-  background: rgba(255, 255, 255, 0.1) !important;
   border-color: var(--dark-accent) !important;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
 }
 
-.theme-sunset input:focus,
-.theme-sunset textarea:focus,
-.theme-sunset select:focus {
-  background: rgba(255, 255, 255, 0.2) !important;
-  border-color: var(--sunset-accent) !important;
-  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+/* Dark Theme Progress Bars */
+.theme-dark .progress-bar,
+.theme-dark .progress-bar-smooth,
+.theme-dark [class*="progress"] {
+  background: var(--dark-progress-bg) !important;
 }
 
-.theme-ocean input:focus,
-.theme-ocean textarea:focus,
-.theme-ocean select:focus {
-  background: rgba(255, 255, 255, 0.2) !important;
-  border-color: var(--ocean-accent) !important;
-  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+.theme-dark .progress-bar-smooth {
+  background: var(--dark-progress-fill) !important;
 }
 
-.theme-forest input:focus,
-.theme-forest textarea:focus,
-.theme-forest select:focus {
-  background: rgba(255, 255, 255, 0.2) !important;
-  border-color: var(--forest-accent) !important;
-  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
+.theme-dark .bg-gray-200 {
+  background: var(--dark-progress-bg) !important;
 }
 
-/* Text Colors for All Themes */
-.theme-glass .text-gray-600,
-.theme-glass .text-gray-700,
-.theme-glass .text-gray-800,
-.theme-glass .text-gray-900 {
-  color: rgba(255, 255, 255, 0.9) !important;
+.theme-dark .bg-red-500 {
+  background: #ef4444 !important;
 }
 
-.theme-glass .text-gray-500 {
-  color: rgba(255, 255, 255, 0.7) !important;
+.theme-dark .bg-orange-500 {
+  background: #f97316 !important;
 }
 
-.theme-dark .text-gray-600,
-.theme-dark .text-gray-700,
-.theme-dark .text-gray-800,
-.theme-dark .text-gray-900 {
-  color: var(--dark-text) !important;
+.theme-dark .bg-yellow-500 {
+  background: #eab308 !important;
 }
 
-.theme-dark .text-gray-500 {
-  color: var(--dark-text-secondary) !important;
+.theme-dark .bg-green-500 {
+  background: #22c55e !important;
 }
 
-.theme-sunset .text-gray-600,
-.theme-sunset .text-gray-700,
-.theme-sunset .text-gray-800,
-.theme-sunset .text-gray-900 {
-  color: var(--sunset-text) !important;
-}
-
-.theme-sunset .text-gray-500 {
-  color: var(--sunset-text-secondary) !important;
-}
-
-.theme-ocean .text-gray-600,
-.theme-ocean .text-gray-700,
-.theme-ocean .text-gray-800,
-.theme-ocean .text-gray-900 {
-  color: var(--ocean-text) !important;
-}
-
-.theme-ocean .text-gray-500 {
-  color: var(--ocean-text-secondary) !important;
-}
-
-.theme-forest .text-gray-600,
-.theme-forest .text-gray-700,
-.theme-forest .text-gray-800,
-.theme-forest .text-gray-900 {
-  color: var(--forest-text) !important;
-}
-
-.theme-forest .text-gray-500 {
-  color: var(--forest-text-secondary) !important;
-}
-
-/* Border Colors for All Themes */
-.theme-glass .border-gray-200,
-.theme-glass .border-gray-300 {
-  border-color: var(--glass-border) !important;
-}
-
+/* Dark Theme Borders and Shadows */
 .theme-dark .border-gray-200,
 .theme-dark .border-gray-300 {
   border-color: var(--dark-border) !important;
-}
-
-.theme-sunset .border-gray-200,
-.theme-sunset .border-gray-300 {
-  border-color: var(--sunset-border) !important;
-}
-
-.theme-ocean .border-gray-200,
-.theme-ocean .border-gray-300 {
-  border-color: var(--ocean-border) !important;
-}
-
-.theme-forest .border-gray-200,
-.theme-forest .border-gray-300 {
-  border-color: var(--forest-border) !important;
-}
-
-/* Shadow Overrides for All Themes */
-.theme-glass .shadow-sm,
-.theme-glass .shadow,
-.theme-glass .shadow-md,
-.theme-glass .shadow-lg {
-  box-shadow: var(--glass-shadow) !important;
 }
 
 .theme-dark .shadow-sm,
@@ -459,177 +228,193 @@ a {
   box-shadow: var(--dark-shadow) !important;
 }
 
-.theme-sunset .shadow-sm,
-.theme-sunset .shadow,
-.theme-sunset .shadow-md,
-.theme-sunset .shadow-lg {
-  box-shadow: var(--sunset-shadow) !important;
-}
-
-.theme-ocean .shadow-sm,
-.theme-ocean .shadow,
-.theme-ocean .shadow-md,
-.theme-ocean .shadow-lg {
-  box-shadow: var(--ocean-shadow) !important;
-}
-
-.theme-forest .shadow-sm,
-.theme-forest .shadow,
-.theme-forest .shadow-md,
-.theme-forest .shadow-lg {
-  box-shadow: var(--forest-shadow) !important;
-}
-
-/* Theme Toggle Button - Keep original styling */
-.theme-glass .theme-toggle-btn,
-.theme-dark .theme-toggle-btn,
-.theme-sunset .theme-toggle-btn,
-.theme-ocean .theme-toggle-btn,
-.theme-forest .theme-toggle-btn {
-  background: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-.theme-glass .theme-toggle-btn:hover,
-.theme-dark .theme-toggle-btn:hover,
-.theme-sunset .theme-toggle-btn:hover,
-.theme-ocean .theme-toggle-btn:hover,
-.theme-forest .theme-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-/* Hover Effects for All Themes */
-.theme-dark .hover\:bg-gray-50:hover {
-  background: var(--dark-surface-hover) !important;
-}
-
-.theme-sunset .hover\:bg-gray-50:hover {
-  background: var(--sunset-surface-hover) !important;
-}
-
-.theme-ocean .hover\:bg-gray-50:hover {
-  background: var(--ocean-surface-hover) !important;
-}
-
-.theme-forest .hover\:bg-gray-50:hover {
-  background: var(--forest-surface-hover) !important;
-}
-
+/* Dark Theme Hover States */
+.theme-dark .hover\:bg-gray-50:hover,
 .theme-dark .hover\:bg-gray-100:hover {
   background: var(--dark-surface-hover) !important;
 }
 
-.theme-sunset .hover\:bg-gray-100:hover {
-  background: var(--sunset-surface-hover) !important;
+.theme-dark .hover\:text-gray-900:hover,
+.theme-dark .hover\:text-gray-700:hover {
+  color: var(--dark-text) !important;
 }
 
-.theme-ocean .hover\:bg-gray-100:hover {
-  background: var(--ocean-surface-hover) !important;
+.theme-dark .hover\:shadow-lg:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.8) !important;
 }
 
-.theme-forest .hover\:bg-gray-100:hover {
-  background: var(--forest-surface-hover) !important;
+/* Dark Theme Navigation and Sidebar */
+.theme-dark .Sidebar {
+  background: var(--dark-surface) !important;
+  border-right: 1px solid var(--dark-border) !important;
 }
 
-/* Focus States for All Themes */
-.theme-dark .focus\:ring-2:focus {
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2) !important;
+.theme-dark .Header {
+  background: var(--dark-surface) !important;
+  border-bottom: 1px solid var(--dark-border) !important;
 }
 
-.theme-sunset .focus\:ring-2:focus {
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2) !important;
+/* Dark Theme Modal and Overlay */
+.theme-dark .Modal,
+.theme-dark .modal,
+.theme-dark [class*="modal"] {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
 }
 
-.theme-ocean .focus\:ring-2:focus {
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2) !important;
+/* Dark Theme Buttons - Enhanced */
+.theme-dark .Button,
+.theme-dark .button,
+.theme-dark [class*="button"],
+.theme-dark button {
+  background: var(--dark-button-bg) !important;
+  border: 1px solid var(--dark-border) !important;
+  box-shadow: var(--dark-shadow);
+  color: var(--dark-text) !important;
+  transition: all 0.2s ease;
 }
 
-.theme-forest .focus\:ring-2:focus {
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2) !important;
+.theme-dark .Button:hover,
+.theme-dark .button:hover,
+.theme-dark [class*="button"]:hover,
+.theme-dark button:hover {
+  background: var(--dark-button-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px -3px rgba(0, 0, 0, 0.6);
 }
 
-/* Active States for All Themes */
-.theme-dark .active,
-.theme-dark .active\:bg-blue-600:active {
-  background: rgba(59, 130, 246, 0.3) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+/* Dark Theme Status and Priority Badges */
+.theme-dark .priority-high {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
 }
 
-.theme-sunset .active,
-.theme-sunset .active\:bg-blue-600:active {
-  background: rgba(59, 130, 246, 0.3) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+.theme-dark .priority-medium {
+  background: rgba(245, 158, 11, 0.2) !important;
+  color: #fcd34d !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
 }
 
-.theme-ocean .active,
-.theme-ocean .active\:bg-blue-600:active {
-  background: rgba(59, 130, 246, 0.3) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+.theme-dark .priority-low {
+  background: rgba(34, 197, 94, 0.2) !important;
+  color: #86efac !important;
+  border: 1px solid rgba(34, 197, 94, 0.3) !important;
 }
 
-.theme-forest .active,
-.theme-forest .active\:bg-blue-600:active {
-  background: rgba(59, 130, 246, 0.3) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+.theme-dark .status-completed {
+  background: rgba(34, 197, 94, 0.2) !important;
+  color: #86efac !important;
+  border: 1px solid rgba(34, 197, 94, 0.3) !important;
 }
 
-/* Disabled States for All Themes */
-.theme-dark .disabled,
-.theme-dark .opacity-50 {
-  opacity: 0.6 !important;
-  background: rgba(255, 255, 255, 0.05) !important;
+.theme-dark .status-in-progress {
+  background: rgba(59, 130, 246, 0.2) !important;
+  color: #93c5fd !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
 }
 
-.theme-sunset .disabled,
-.theme-sunset .opacity-50 {
-  opacity: 0.6 !important;
-  background: rgba(255, 255, 255, 0.05) !important;
+.theme-dark .status-not-started {
+  background: rgba(107, 114, 128, 0.2) !important;
+  color: #d1d5db !important;
+  border: 1px solid rgba(107, 114, 128, 0.3) !important;
 }
 
-.theme-ocean .disabled,
-.theme-ocean .opacity-50 {
-  opacity: 0.6 !important;
-  background: rgba(255, 255, 255, 0.05) !important;
+/* Dark Theme Status Badge Overrides */
+.theme-dark .bg-green-100 {
+  background: rgba(34, 197, 94, 0.2) !important;
 }
 
-.theme-forest .disabled,
-.theme-forest .opacity-50 {
-  opacity: 0.6 !important;
-  background: rgba(255, 255, 255, 0.05) !important;
+.theme-dark .text-green-700 {
+  color: #86efac !important;
 }
 
-/* Loading States for All Themes */
-.theme-dark .loading,
-.theme-dark .animate-pulse {
-  background: linear-gradient(90deg, var(--dark-surface) 25%, rgba(255, 255, 255, 0.1) 50%, var(--dark-surface) 75%) !important;
-  background-size: 200% 100% !important;
-  animation: theme-shimmer 1.5s infinite !important;
+.theme-dark .border-green-200 {
+  border-color: rgba(34, 197, 94, 0.3) !important;
 }
 
-@keyframes theme-shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+.theme-dark .bg-blue-100 {
+  background: rgba(59, 130, 246, 0.2) !important;
 }
 
-/* Scrollbars for All Themes */
+.theme-dark .text-blue-700 {
+  color: #93c5fd !important;
+}
+
+.theme-dark .border-blue-200 {
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+.theme-dark .bg-gray-100 {
+  background: rgba(107, 114, 128, 0.2) !important;
+}
+
+.theme-dark .text-gray-700 {
+  color: #d1d5db !important;
+}
+
+.theme-dark .border-gray-200 {
+  border-color: rgba(107, 114, 128, 0.3) !important;
+}
+
+/* Dark Theme Progress Card Borders - Preserve Original Colors */
+.theme-dark .card-progress-gray {
+  border-left: 4px solid #6b7280 !important;
+  border-top: 1px solid #6b7280 !important;
+  border-right: 1px solid #6b7280 !important;
+  border-bottom: 1px solid #6b7280 !important;
+}
+
+.theme-dark .card-progress-red {
+  border-left: 4px solid #ef4444 !important;
+  border-top: 1px solid #ef4444 !important;
+  border-right: 1px solid #ef4444 !important;
+  border-bottom: 1px solid #ef4444 !important;
+}
+
+.theme-dark .card-progress-orange {
+  border-left: 4px solid #f59e0b !important;
+  border-top: 1px solid #f59e0b !important;
+  border-right: 1px solid #f59e0b !important;
+  border-bottom: 1px solid #f59e0b !important;
+}
+
+.theme-dark .card-progress-yellow {
+  border-left: 4px solid #eab308 !important;
+  border-top: 1px solid #eab308 !important;
+  border-right: 1px solid #eab308 !important;
+  border-bottom: 1px solid #eab308 !important;
+}
+
+.theme-dark .card-progress-green {
+  border-left: 4px solid #22c55e !important;
+  border-top: 1px solid #22c55e !important;
+  border-right: 1px solid #22c55e !important;
+  border-bottom: 1px solid #22c55e !important;
+}
+
+/* Dark Theme Dropdown and Menu */
+.theme-dark .theme-dropdown {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  box-shadow: var(--dark-shadow);
+}
+
+.theme-dark .theme-dropdown .text-gray-900 {
+  color: var(--dark-text) !important;
+}
+
+.theme-dark .theme-dropdown .text-gray-600 {
+  color: var(--dark-text-secondary) !important;
+}
+
+/* Dark Theme Scrollbar */
 .theme-dark ::-webkit-scrollbar {
   width: 8px;
 }
 
 .theme-dark ::-webkit-scrollbar-track {
   background: var(--dark-surface);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
 }
 
 .theme-dark ::-webkit-scrollbar-thumb {
@@ -638,482 +423,10 @@ a {
 }
 
 .theme-dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--dark-surface-hover);
 }
 
-.theme-sunset ::-webkit-scrollbar {
-  width: 8px;
-}
-
-.theme-sunset ::-webkit-scrollbar-track {
-  background: var(--sunset-surface);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.theme-sunset ::-webkit-scrollbar-thumb {
-  background: var(--sunset-border);
-  border-radius: 4px;
-}
-
-.theme-sunset ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.theme-ocean ::-webkit-scrollbar {
-  width: 8px;
-}
-
-.theme-ocean ::-webkit-scrollbar-track {
-  background: var(--ocean-surface);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.theme-ocean ::-webkit-scrollbar-thumb {
-  background: var(--ocean-border);
-  border-radius: 4px;
-}
-
-.theme-ocean ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.theme-forest ::-webkit-scrollbar {
-  width: 8px;
-}
-
-.theme-forest ::-webkit-scrollbar-track {
-  background: var(--forest-surface);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.theme-forest ::-webkit-scrollbar-thumb {
-  background: var(--forest-border);
-  border-radius: 4px;
-}
-
-.theme-forest ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* Animations for All Themes */
-.theme-dark *,
-.theme-sunset *,
-.theme-ocean *,
-.theme-forest * {
-  transition: all 0.3s ease;
-}
-
-/* Premium Card Enhancements */
-.theme-dark .bg-white {
-  background: var(--dark-surface) !important;
-  border: 1px solid var(--dark-border) !important;
-  box-shadow: var(--dark-shadow) !important;
-}
-
-.theme-sunset .bg-white {
-  background: var(--sunset-surface) !important;
-  border: 1px solid var(--sunset-border) !important;
-  box-shadow: var(--sunset-shadow) !important;
-}
-
-.theme-ocean .bg-white {
-  background: var(--ocean-surface) !important;
-  border: 1px solid var(--ocean-border) !important;
-  box-shadow: var(--ocean-shadow) !important;
-}
-
-.theme-forest .bg-white {
-  background: var(--forest-surface) !important;
-  border: 1px solid var(--forest-border) !important;
-  box-shadow: var(--forest-shadow) !important;
-}
-
-/* Premium Button Enhancements */
-.theme-dark .bg-blue-600 {
-  background: var(--dark-accent) !important;
-  border-color: var(--dark-accent) !important;
-}
-
-.theme-sunset .bg-blue-600 {
-  background: var(--sunset-accent) !important;
-  border-color: var(--sunset-accent) !important;
-}
-
-.theme-ocean .bg-blue-600 {
-  background: var(--ocean-accent) !important;
-  border-color: var(--ocean-accent) !important;
-}
-
-.theme-forest .bg-blue-600 {
-  background: var(--forest-accent) !important;
-  border-color: var(--forest-accent) !important;
-}
-
-.theme-dark .bg-blue-600:hover {
-  background: var(--dark-accent-hover) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 25px -3px rgba(0, 0, 0, 0.3);
-}
-
-.theme-sunset .bg-blue-600:hover {
-  background: var(--sunset-accent) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 25px -3px rgba(251, 191, 36, 0.3);
-}
-
-.theme-ocean .bg-blue-600:hover {
-  background: var(--ocean-accent) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 25px -3px rgba(34, 211, 238, 0.3);
-}
-
-.theme-forest .bg-blue-600:hover {
-  background: var(--forest-accent) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 25px -3px rgba(52, 211, 153, 0.3);
-}
-
-/* Premium Form Enhancements */
-.theme-dark .bg-gray-50 {
-  background: var(--dark-surface) !important;
-  border-color: var(--dark-border) !important;
-}
-
-.theme-sunset .bg-gray-50 {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-}
-
-.theme-ocean .bg-gray-50 {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-}
-
-.theme-forest .bg-gray-50 {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-}
-
-/* Premium Table Enhancements */
-.theme-dark table {
-  background: var(--dark-surface) !important;
-  border-color: var(--dark-border) !important;
-}
-
-.theme-sunset table {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-}
-
-.theme-ocean table {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-}
-
-.theme-forest table {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-}
-
-.theme-dark th,
-.theme-dark td {
-  background: var(--dark-surface) !important;
-  border-color: var(--dark-border) !important;
-  color: var(--dark-text) !important;
-}
-
-.theme-sunset th,
-.theme-sunset td {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-  color: var(--sunset-text) !important;
-}
-
-.theme-ocean th,
-.theme-ocean td {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-  color: var(--ocean-text) !important;
-}
-
-.theme-forest th,
-.theme-forest td {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-  color: var(--forest-text) !important;
-}
-
-/* Premium Navigation Enhancements */
-.theme-dark nav {
-  background: var(--dark-surface) !important;
-  border-color: var(--dark-border) !important;
-}
-
-.theme-sunset nav {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-}
-
-.theme-ocean nav {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-}
-
-.theme-forest nav {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-}
-
-/* Premium Modal Enhancements */
-.theme-dark .modal,
-.theme-dark .modal-content {
-  background: var(--dark-surface) !important;
-  border-color: var(--dark-border) !important;
-  box-shadow: var(--dark-shadow) !important;
-}
-
-.theme-sunset .modal,
-.theme-sunset .modal-content {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-  box-shadow: var(--sunset-shadow) !important;
-}
-
-.theme-ocean .modal,
-.theme-ocean .modal-content {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-  box-shadow: var(--ocean-shadow) !important;
-}
-
-.theme-forest .modal,
-.theme-forest .modal-content {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-  box-shadow: var(--forest-shadow) !important;
-}
-
-/* Premium Dropdown Enhancements */
-.theme-dark .dropdown,
-.theme-dark .dropdown-content {
-  background: var(--dark-surface) !important;
-  border-color: var(--dark-border) !important;
-  box-shadow: var(--dark-shadow) !important;
-}
-
-.theme-sunset .dropdown,
-.theme-sunset .dropdown-content {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-  box-shadow: var(--sunset-shadow) !important;
-}
-
-.theme-ocean .dropdown,
-.theme-ocean .dropdown-content {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-  box-shadow: var(--ocean-shadow) !important;
-}
-
-.theme-forest .dropdown,
-.theme-forest .dropdown-content {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-  box-shadow: var(--forest-shadow) !important;
-}
-
-/* Premium Badge Enhancements */
-.theme-dark .badge {
-  background: var(--dark-surface) !important;
-  border-color: var(--dark-border) !important;
-  box-shadow: var(--dark-shadow) !important;
-}
-
-.theme-sunset .badge {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-  box-shadow: var(--sunset-shadow) !important;
-}
-
-.theme-ocean .badge {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-  box-shadow: var(--ocean-shadow) !important;
-}
-
-.theme-forest .badge {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-  box-shadow: var(--forest-shadow) !important;
-}
-
-/* Premium Alert Enhancements */
-.theme-dark .alert,
-.theme-dark .notification {
-  background: var(--dark-surface) !important;
-  border-color: var(--dark-border) !important;
-  box-shadow: var(--dark-shadow) !important;
-}
-
-.theme-sunset .alert,
-.theme-sunset .notification {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-  box-shadow: var(--sunset-shadow) !important;
-}
-
-.theme-ocean .alert,
-.theme-ocean .notification {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-  box-shadow: var(--ocean-shadow) !important;
-}
-
-.theme-forest .alert,
-.theme-forest .notification {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-  box-shadow: var(--forest-shadow) !important;
-}
-
-/* Sticky Progress Bar Styles */
-.sticky {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-}
-
-/* Theme-specific sticky progress bar styles */
-.theme-glass .sticky {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow);
-}
-
-.theme-dark .sticky {
-  background: var(--dark-surface) !important;
-  border-color: var(--dark-border) !important;
-  box-shadow: var(--dark-shadow);
-}
-
-.theme-sunset .sticky {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-  box-shadow: var(--sunset-shadow);
-}
-
-.theme-ocean .sticky {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-  box-shadow: var(--ocean-shadow);
-}
-
-.theme-forest .sticky {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-  box-shadow: var(--forest-shadow);
-}
-
-/* Ensure sticky bar text is readable in all themes */
-.theme-glass .sticky .text-gray-900 {
-  color: rgba(255, 255, 255, 0.9) !important;
-}
-
-.theme-glass .sticky .text-gray-600 {
-  color: rgba(255, 255, 255, 0.7) !important;
-}
-
-.theme-dark .sticky .text-gray-900 {
-  color: var(--dark-text) !important;
-}
-
-.theme-dark .sticky .text-gray-600 {
-  color: var(--dark-text-secondary) !important;
-}
-
-.theme-sunset .sticky .text-gray-900 {
-  color: var(--sunset-text) !important;
-}
-
-.theme-sunset .sticky .text-gray-600 {
-  color: var(--sunset-text-secondary) !important;
-}
-
-.theme-ocean .sticky .text-gray-900 {
-  color: var(--ocean-text) !important;
-}
-
-.theme-ocean .sticky .text-gray-600 {
-  color: var(--ocean-text-secondary) !important;
-}
-
-.theme-forest .sticky .text-gray-900 {
-  color: var(--forest-text) !important;
-}
-
-.theme-forest .sticky .text-gray-600 {
-  color: var(--forest-text-secondary) !important;
-}
-
-/* Ensure sticky bar border is visible in all themes */
-.theme-glass .sticky {
-  border-color: var(--glass-border) !important;
-}
-
-.theme-dark .sticky {
-  border-color: var(--dark-border) !important;
-}
-
-.theme-sunset .sticky {
-  border-color: var(--sunset-border) !important;
-}
-
-.theme-ocean .sticky {
-  border-color: var(--ocean-border) !important;
-}
-
-.theme-forest .sticky {
-  border-color: var(--forest-border) !important;
-}
-
-/* Ensure sticky bar background is properly opaque */
-.theme-glass .sticky {
-  background: rgba(255, 255, 255, 0.95) !important;
-}
-
-.theme-dark .sticky {
-  background: var(--dark-surface) !important;
-}
-
-.theme-sunset .sticky {
-  background: var(--sunset-surface) !important;
-}
-
-.theme-ocean .sticky {
-  background: var(--ocean-surface) !important;
-}
-
-.theme-forest .sticky {
-  background: var(--forest-surface) !important;
-}
-
-/* Preserve Progress-Based Card Border Colors in All Themes */
-/* These colors should NOT be overridden by theme styles */
-
-/* Progress-based border colors - ALWAYS keep these */
-.border-red-500,
-.border-orange-500,
-.border-yellow-500,
-.border-green-500 {
-  border-color: inherit !important;
-}
-
-/* Card borders based on progress - preserve original colors */
+/* Progress Card Border Classes - Work in All Themes */
 .card-progress-gray {
   border-left: 4px solid #9ca3af !important;
   border-top: 1px solid #9ca3af !important;
@@ -1147,866 +460,4 @@ a {
   border-top: 1px solid #22c55e !important;
   border-right: 1px solid #22c55e !important;
   border-bottom: 1px solid #22c55e !important;
-}
-
-/* Theme-specific progress card classes - ensure colors work in all themes */
-.theme-glass .card-progress-gray {
-  border-left: 4px solid #9ca3af !important;
-  border: 1px solid #9ca3af !important;
-}
-
-.theme-glass .card-progress-red {
-  border-left: 4px solid #ef4444 !important;
-  border: 1px solid #ef4444 !important;
-}
-
-.theme-glass .card-progress-orange {
-  border-left: 4px solid #f97316 !important;
-  border: 1px solid #f97316 !important;
-}
-
-.theme-glass .card-progress-yellow {
-  border-left: 4px solid #eab308 !important;
-  border: 1px solid #eab308 !important;
-}
-
-.theme-glass .card-progress-green {
-  border-left: 4px solid #22c55e !important;
-  border: 1px solid #22c55e !important;
-}
-
-.theme-dark .card-progress-gray {
-  border-left: 4px solid #9ca3af !important;
-  border: 1px solid #9ca3af !important;
-}
-
-.theme-dark .card-progress-red {
-  border-left: 4px solid #ef4444 !important;
-  border: 1px solid #ef4444 !important;
-}
-
-.theme-dark .card-progress-orange {
-  border-left: 4px solid #f97316 !important;
-  border: 1px solid #f97316 !important;
-}
-
-.theme-dark .card-progress-yellow {
-  border-left: 4px solid #eab308 !important;
-  border: 1px solid #eab308 !important;
-}
-
-.theme-dark .card-progress-green {
-  border-left: 4px solid #22c55e !important;
-  border: 1px solid #22c55e !important;
-}
-
-.theme-sunset .card-progress-gray {
-  border-left: 4px solid #9ca3af !important;
-  border: 1px solid #9ca3af !important;
-}
-
-.theme-sunset .card-progress-red {
-  border-left: 4px solid #ef4444 !important;
-  border: 1px solid #ef4444 !important;
-}
-
-.theme-sunset .card-progress-orange {
-  border-left: 4px solid #f97316 !important;
-  border: 1px solid #f97316 !important;
-}
-
-.theme-sunset .card-progress-yellow {
-  border-left: 4px solid #eab308 !important;
-  border: 1px solid #eab308 !important;
-}
-
-.theme-sunset .card-progress-green {
-  border-left: 4px solid #22c55e !important;
-  border: 1px solid #22c55e !important;
-}
-
-.theme-ocean .card-progress-gray {
-  border-left: 4px solid #9ca3af !important;
-  border: 1px solid #9ca3af !important;
-}
-
-.theme-ocean .card-progress-red {
-  border-left: 4px solid #ef4444 !important;
-  border: 1px solid #ef4444 !important;
-}
-
-.theme-ocean .card-progress-orange {
-  border-left: 4px solid #f97316 !important;
-  border: 1px solid #f97316 !important;
-}
-
-.theme-ocean .card-progress-yellow {
-  border-left: 4px solid #eab308 !important;
-  border: 1px solid #eab308 !important;
-}
-
-.theme-ocean .card-progress-green {
-  border-left: 4px solid #22c55e !important;
-  border: 1px solid #22c55e !important;
-}
-
-.theme-forest .card-progress-gray {
-  border-left: 4px solid #9ca3af !important;
-  border: 1px solid #9ca3af !important;
-}
-
-.theme-forest .card-progress-red {
-  border-left: 4px solid #ef4444 !important;
-  border: 1px solid #ef4444 !important;
-}
-
-.theme-forest .card-progress-orange {
-  border-left: 4px solid #f97316 !important;
-  border: 1px solid #f97316 !important;
-}
-
-.theme-forest .card-progress-yellow {
-  border-left: 4px solid #eab308 !important;
-  border: 1px solid #eab308 !important;
-}
-
-.theme-forest .card-progress-green {
-  border-left: 4px solid #22c55e !important;
-  border: 1px solid #22c55e !important;
-}
-
-/* Progress bar colors - preserve original */
-.progress-bar.bg-red-500 {
-  background-color: #ef4444 !important;
-}
-
-.progress-bar.bg-orange-500 {
-  background-color: #f97316 !important;
-}
-
-.progress-bar.bg-yellow-500 {
-  background-color: #eab308 !important;
-}
-
-.progress-bar.bg-green-500 {
-  background-color: #22c55e !important;
-}
-
-/* Task priority colors - preserve original */
-.priority-high {
-  color: #dc2626 !important;
-  background-color: #fef2f2 !important;
-}
-
-.priority-medium {
-  color: #d97706 !important;
-  background-color: #fffbeb !important;
-}
-
-.priority-low {
-  color: #16a34a !important;
-  background-color: #f0fdf4 !important;
-}
-
-/* Status colors - preserve original */
-.status-completed {
-  background-color: #dcfce7 !important;
-  color: #166534 !important;
-}
-
-.status-in-progress {
-  background-color: #dbeafe !important;
-  color: #1e40af !important;
-}
-
-.status-not-started {
-  background-color: #f3f4f6 !important;
-  color: #374151 !important;
-}
-
-/* Dark theme specific overrides for progress-based elements */
-.theme-dark .priority-high {
-  background-color: rgba(239, 68, 68, 0.2) !important;
-  color: #fca5a5 !important;
-}
-
-.theme-dark .priority-medium {
-  background-color: rgba(249, 115, 22, 0.2) !important;
-  color: #fdba74 !important;
-}
-
-.theme-dark .priority-low {
-  background-color: rgba(34, 197, 94, 0.2) !important;
-  color: #86efac !important;
-}
-
-.theme-dark .status-completed {
-  background-color: rgba(34, 197, 94, 0.2) !important;
-  color: #86efac !important;
-}
-
-.theme-dark .status-in-progress {
-  background-color: rgba(59, 130, 246, 0.2) !important;
-  color: #93c5fd !important;
-}
-
-.theme-dark .status-not-started {
-  background-color: rgba(156, 163, 175, 0.2) !important;
-  color: #d1d5db !important;
-}
-
-/* Glass theme specific overrides for progress-based elements */
-.theme-glass .priority-high {
-  background-color: rgba(239, 68, 68, 0.3) !important;
-  color: #fca5a5 !important;
-}
-
-.theme-glass .priority-medium {
-  background-color: rgba(249, 115, 22, 0.3) !important;
-  color: #fdba74 !important;
-}
-
-.theme-glass .priority-low {
-  background-color: rgba(34, 197, 94, 0.3) !important;
-  color: #86efac !important;
-}
-
-.theme-glass .status-completed {
-  background-color: rgba(34, 197, 94, 0.3) !important;
-  color: #86efac !important;
-}
-
-.theme-glass .status-in-progress {
-  background-color: rgba(59, 130, 246, 0.3) !important;
-  color: #93c5fd !important;
-}
-
-.theme-glass .status-not-started {
-  background-color: rgba(156, 163, 175, 0.3) !important;
-  color: #d1d5db !important;
-}
-
-/* Sunset theme specific overrides for progress-based elements */
-.theme-sunset .priority-high {
-  background-color: rgba(239, 68, 68, 0.3) !important;
-  color: #fca5a5 !important;
-}
-
-.theme-sunset .priority-medium {
-  background-color: rgba(249, 115, 22, 0.3) !important;
-  color: #fdba74 !important;
-}
-
-.theme-sunset .priority-low {
-  background-color: rgba(34, 197, 94, 0.3) !important;
-  color: #86efac !important;
-}
-
-.theme-sunset .status-completed {
-  background-color: rgba(34, 197, 94, 0.3) !important;
-  color: #86efac !important;
-}
-
-.theme-sunset .status-in-progress {
-  background-color: rgba(59, 130, 246, 0.3) !important;
-  color: #93c5fd !important;
-}
-
-.theme-sunset .status-not-started {
-  background-color: rgba(156, 163, 175, 0.3) !important;
-  color: #d1d5db !important;
-}
-
-/* Ocean theme specific overrides for progress-based elements */
-.theme-ocean .priority-high {
-  background-color: rgba(239, 68, 68, 0.3) !important;
-  color: #fca5a5 !important;
-}
-
-.theme-ocean .priority-medium {
-  background-color: rgba(249, 115, 22, 0.3) !important;
-  color: #fdba74 !important;
-}
-
-.theme-ocean .priority-low {
-  background-color: rgba(34, 197, 94, 0.3) !important;
-  color: #86efac !important;
-}
-
-.theme-ocean .status-completed {
-  background-color: rgba(34, 197, 94, 0.3) !important;
-  color: #86efac !important;
-}
-
-.theme-ocean .status-in-progress {
-  background-color: rgba(59, 130, 246, 0.3) !important;
-  color: #93c5fd !important;
-}
-
-.theme-ocean .status-not-started {
-  background-color: rgba(156, 163, 175, 0.3) !important;
-  color: #d1d5db !important;
-}
-
-/* Forest theme specific overrides for progress-based elements */
-.theme-forest .priority-high {
-  background-color: rgba(239, 68, 68, 0.3) !important;
-  color: #fca5a5 !important;
-}
-
-.theme-forest .priority-medium {
-  background-color: rgba(249, 115, 22, 0.3) !important;
-  color: #fdba74 !important;
-}
-
-.theme-forest .priority-low {
-  background-color: rgba(34, 197, 94, 0.3) !important;
-  color: #86efac !important;
-}
-
-.theme-forest .status-completed {
-  background-color: rgba(34, 197, 94, 0.3) !important;
-  color: #86efac !important;
-}
-
-.theme-forest .status-in-progress {
-  background-color: rgba(59, 130, 246, 0.3) !important;
-  color: #93c5fd !important;
-}
-
-.theme-forest .status-not-started {
-  background-color: rgba(156, 163, 175, 0.3) !important;
-  color: #d1d5db !important;
-}
-
-/* Theme Dropdown Menu - Ensure it's always visible and readable */
-.theme-dropdown {
-  position: absolute;
-  z-index: 9999 !important;
-  background: rgba(255, 255, 255, 1) !important;
-  border: 1px solid rgba(229, 231, 235, 0.9) !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* Theme-specific dropdown styles */
-.theme-glass .theme-dropdown {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 25px 50px -12px rgba(31, 38, 135, 0.4) !important;
-}
-
-.theme-dark .theme-dropdown {
-  background: var(--dark-surface) !important;
-  border-color: var(--dark-border) !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6) !important;
-}
-
-.theme-sunset .theme-dropdown {
-  background: var(--sunset-surface) !important;
-  border-color: var(--sunset-border) !important;
-  box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.4) !important;
-}
-
-.theme-ocean .theme-dropdown {
-  background: var(--ocean-surface) !important;
-  border-color: var(--ocean-border) !important;
-  box-shadow: 0 25px 50px -12px rgba(34, 211, 238, 0.4) !important;
-}
-
-.theme-forest .theme-dropdown {
-  background: var(--forest-surface) !important;
-  border-color: var(--forest-border) !important;
-  box-shadow: 0 25px 50px -12px rgba(52, 211, 153, 0.4) !important;
-}
-
-/* Ensure dropdown text is always readable */
-.theme-dropdown .text-gray-900 {
-  color: #111827 !important;
-}
-
-.theme-dropdown .text-gray-600 {
-  color: #4b5563 !important;
-}
-
-/* Dark theme dropdown text */
-.theme-dark .theme-dropdown .text-gray-900 {
-  color: var(--dark-text) !important;
-}
-
-.theme-dark .theme-dropdown .text-gray-600 {
-  color: var(--dark-text-secondary) !important;
-}
-
-/* Glass theme dropdown text */
-.theme-glass .theme-dropdown .text-gray-900 {
-  color: rgba(255, 255, 255, 0.9) !important;
-}
-
-.theme-glass .theme-dropdown .text-gray-600 {
-  color: rgba(255, 255, 255, 0.7) !important;
-}
-
-/* Sunset theme dropdown text */
-.theme-sunset .theme-dropdown .text-gray-900 {
-  color: var(--sunset-text) !important;
-}
-
-.theme-sunset .theme-dropdown .text-gray-600 {
-  color: var(--sunset-text-secondary) !important;
-}
-
-/* Ocean theme dropdown text */
-.theme-ocean .theme-dropdown .text-gray-900 {
-  color: var(--ocean-text) !important;
-}
-
-.theme-ocean .theme-dropdown .text-gray-600 {
-  color: var(--ocean-text-secondary) !important;
-}
-
-/* Forest theme dropdown text */
-.theme-forest .theme-dropdown .text-gray-900 {
-  color: var(--forest-text) !important;
-}
-
-.theme-forest .theme-dropdown .text-gray-600 {
-  color: var(--forest-text-secondary) !important;
-}
-
-/* Prevent clicks on elements behind the dropdown */
-.theme-dropdown-open {
-  pointer-events: none;
-}
-
-.theme-dropdown-open * {
-  pointer-events: none;
-}
-
-/* Ensure the dropdown itself is clickable */
-.theme-dropdown,
-.theme-dropdown * {
-  pointer-events: auto !important;
-}
-
-/* Overlay to prevent background clicks when dropdown is open */
-.theme-dropdown-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9998;
-  background: transparent;
-}
-
-/* Default theme styles - apply to all themes */
-.theme-default,
-.theme-glass,
-.theme-dark,
-.theme-sunset,
-.theme-ocean,
-.theme-forest {
-  /* Card styles - same as dashboard default */
-  .bg-white {
-    background-color: #ffffff !important;
-  }
-  
-  .bg-gray-50 {
-    background-color: #f9fafb !important;
-  }
-  
-  .bg-gray-100 {
-    background-color: #f3f4f6 !important;
-  }
-  
-  /* Text colors */
-  .text-gray-900 {
-    color: #111827 !important;
-  }
-  
-  .text-gray-600 {
-    color: #4b5563 !important;
-  }
-  
-  .text-gray-500 {
-    color: #6b7280 !important;
-  }
-  
-  /* Border colors */
-  .border-gray-100 {
-    border-color: #f3f4f6 !important;
-  }
-  
-  .border-gray-200 {
-    border-color: #e5e7eb !important;
-  }
-  
-  /* Shadow styles */
-  .shadow-sm {
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
-  }
-  
-  .shadow-md {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
-  }
-  
-  .shadow-lg {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
-  }
-  
-  /* Progress card styles - ensure colored borders work in all themes */
-  .card-progress-gray {
-    border-left: 4px solid #9ca3af !important;
-    border-top: 1px solid #9ca3af !important;
-    border-right: 1px solid #9ca3af !important;
-    border-bottom: 1px solid #9ca3af !important;
-  }
-  
-  .card-progress-red {
-    border-left: 4px solid #ef4444 !important;
-    border-top: 1px solid #ef4444 !important;
-    border-right: 1px solid #ef4444 !important;
-    border-bottom: 1px solid #ef4444 !important;
-  }
-  
-  .card-progress-orange {
-    border-left: 4px solid #f97316 !important;
-    border-top: 1px solid #f97316 !important;
-    border-right: 1px solid #f97316 !important;
-    border-bottom: 1px solid #f97316 !important;
-  }
-  
-  .card-progress-yellow {
-    border-left: 4px solid #eab308 !important;
-    border-top: 1px solid #eab308 !important;
-    border-right: 1px solid #eab308 !important;
-    border-bottom: 1px solid #eab308 !important;
-  }
-  
-  .card-progress-green {
-    border-left: 4px solid #22c55e !important;
-    border-top: 1px solid #22c55e !important;
-    border-right: 1px solid #22c55e !important;
-    border-bottom: 1px solid #22c55e !important;
-  }
-}
-
-/* Preserve purple colors for client cards across all themes */
-.theme-glass .border-purple-500,
-.theme-dark .border-purple-500,
-.theme-sunset .border-purple-500,
-.theme-ocean .border-purple-500,
-.theme-forest .border-purple-500 {
-  border-color: #8b5cf6 !important;
-}
-
-.theme-glass .border-l-purple-500,
-.theme-dark .border-l-purple-500,
-.theme-sunset .border-l-purple-500,
-.theme-ocean .border-l-purple-500,
-.theme-forest .border-l-purple-500 {
-  border-left-color: #8b5cf6 !important;
-}
-
-/* Preserve purple text colors for client cards */
-.theme-glass .text-purple-500,
-.theme-dark .text-purple-500,
-.theme-sunset .text-purple-500,
-.theme-ocean .text-purple-500,
-.theme-forest .text-purple-500 {
-  color: #8b5cf6 !important;
-}
-
-/* Client card specific styles - preserve white background and purple border across all themes */
-.theme-glass .border-l-4.border-purple-500,
-.theme-dark .border-l-4.border-purple-500,
-.theme-sunset .border-l-4.border-purple-500,
-.theme-ocean .border-l-4.border-purple-500,
-.theme-forest .border-l-4.border-purple-500 {
-  background: white !important;
-  border-left: 4px solid #8b5cf6 !important;
-  border-top: 1px solid #e5e7eb !important;
-  border-right: 1px solid #e5e7eb !important;
-  border-bottom: 1px solid #e5e7eb !important;
-}
-
-/* Ensure client card text remains readable in all themes */
-.theme-glass .border-l-4.border-purple-500 .text-gray-900,
-.theme-dark .border-l-4.border-purple-500 .text-gray-900,
-.theme-sunset .border-l-4.border-purple-500 .text-gray-900,
-.theme-ocean .border-l-4.border-purple-500 .text-gray-900,
-.theme-forest .border-l-4.border-purple-500 .text-gray-900 {
-  color: #111827 !important;
-}
-
-.theme-glass .border-l-4.border-purple-500 .text-gray-600,
-.theme-dark .border-l-4.border-purple-500 .text-gray-600,
-.theme-sunset .border-l-4.border-purple-500 .text-gray-600,
-.theme-ocean .border-l-4.border-purple-500 .text-gray-600,
-.theme-forest .border-l-4.border-purple-500 .text-gray-600 {
-  color: #4b5563 !important;
-}
-
-.theme-glass .border-l-4.border-purple-500 .text-gray-500,
-.theme-dark .border-l-4.border-purple-500 .text-gray-500,
-.theme-sunset .border-l-4.border-purple-500 .text-gray-500,
-.theme-ocean .border-l-4.border-purple-500 .text-gray-500,
-.theme-forest .border-l-4.border-purple-500 .text-gray-500 {
-  color: #6b7280 !important;
-}
-
-/* Glass Theme Text and Cards */
-.theme-glass .text-gray-900,
-.theme-glass .text-gray-800,
-.theme-glass .text-gray-700,
-.theme-glass .text-gray-600,
-.theme-glass .text-gray-500,
-.theme-glass h1,
-.theme-glass h2,
-.theme-glass h3,
-.theme-glass p,
-.theme-glass span {
-  color: #ffffff !important;
-}
-
-.theme-glass .Card,
-.theme-glass .bg-white,
-.theme-glass .bg-gray-50,
-.theme-glass .bg-gray-100 {
-  background: rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-}
-
-/* Dark Theme Text and Cards */
-.theme-dark .text-gray-900,
-.theme-dark .text-gray-800,
-.theme-dark .text-gray-700,
-.theme-dark .text-gray-600,
-.theme-dark .text-gray-500,
-.theme-dark h1,
-.theme-dark h2,
-.theme-dark h3,
-.theme-dark p,
-.theme-dark span {
-  color: #f1f5f9 !important;
-}
-
-.theme-dark .Card,
-.theme-dark .bg-white,
-.theme-dark .bg-gray-50,
-.theme-dark .bg-gray-100 {
-  background: #1e293b !important;
-  border: 1px solid #334155 !important;
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.5);
-}
-
-/* Sunset Theme Text and Cards */
-.theme-sunset .text-gray-900,
-.theme-sunset .text-gray-800,
-.theme-sunset .text-gray-700,
-.theme-sunset .text-gray-600,
-.theme-sunset .text-gray-500,
-.theme-sunset h1,
-.theme-sunset h2,
-.theme-sunset h3,
-.theme-sunset p,
-.theme-sunset span {
-  color: #ffffff !important;
-}
-
-.theme-sunset .Card,
-.theme-sunset .bg-white,
-.theme-sunset .bg-gray-50,
-.theme-sunset .bg-gray-100 {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 10px 25px -3px rgba(251, 191, 36, 0.3);
-}
-
-/* Ocean Theme Text and Cards */
-.theme-ocean .text-gray-900,
-.theme-ocean .text-gray-800,
-.theme-ocean .text-gray-700,
-.theme-ocean .text-gray-600,
-.theme-ocean .text-gray-500,
-.theme-ocean h1,
-.theme-ocean h2,
-.theme-ocean h3,
-.theme-ocean p,
-.theme-ocean span {
-  color: #ffffff !important;
-}
-
-.theme-ocean .Card,
-.theme-ocean .bg-white,
-.theme-ocean .bg-gray-50,
-.theme-ocean .bg-gray-100 {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 10px 25px -3px rgba(34, 211, 238, 0.3);
-}
-
-/* Forest Theme Text and Cards */
-.theme-forest .text-gray-900,
-.theme-forest .text-gray-800,
-.theme-forest .text-gray-700,
-.theme-forest .text-gray-600,
-.theme-forest .text-gray-500,
-.theme-forest h1,
-.theme-forest h2,
-.theme-forest h3,
-.theme-forest p,
-.theme-forest span {
-  color: #ffffff !important;
-}
-
-.theme-forest .Card,
-.theme-forest .bg-white,
-.theme-forest .bg-gray-50,
-.theme-forest .bg-gray-100 {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 10px 25px -3px rgba(52, 211, 153, 0.3);
-}
-
-/* Card Component Theme Styling */
-.theme-glass .Card,
-.theme-glass .card,
-.theme-glass [class*="card"] {
-  background: rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-}
-
-.theme-dark .Card,
-.theme-dark .card,
-.theme-dark [class*="card"] {
-  background: #1e293b !important;
-  border: 1px solid #334155 !important;
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.5);
-}
-
-.theme-sunset .Card,
-.theme-sunset .card,
-.theme-sunset [class*="card"] {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 10px 25px -3px rgba(251, 191, 36, 0.3);
-}
-
-.theme-ocean .Card,
-.theme-ocean .card,
-.theme-ocean [class*="card"] {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 10px 25px -3px rgba(34, 211, 238, 0.3);
-}
-
-.theme-forest .Card,
-.theme-forest .card,
-.theme-forest [class*="card"] {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 10px 25px -3px rgba(52, 211, 153, 0.3);
-}
-
-/* Button Component Theme Styling */
-.theme-glass .Button,
-.theme-glass .button,
-.theme-glass [class*="button"],
-.theme-glass button {
-  background: rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  color: #ffffff !important;
-}
-
-.theme-dark .Button,
-.theme-dark .button,
-.theme-dark [class*="button"],
-.theme-dark button {
-  background: #1e293b !important;
-  border: 1px solid #334155 !important;
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.5);
-  color: #f1f5f9 !important;
-}
-
-.theme-sunset .Button,
-.theme-sunset .button,
-.theme-sunset [class*="button"],
-.theme-sunset button {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 10px 25px -3px rgba(251, 191, 36, 0.3);
-  color: #ffffff !important;
-}
-
-.theme-ocean .Button,
-.theme-ocean .button,
-.theme-ocean [class*="button"],
-.theme-ocean button {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 10px 25px -3px rgba(34, 211, 238, 0.3);
-  color: #ffffff !important;
-}
-
-.theme-forest .Button,
-.theme-forest .button,
-.theme-forest [class*="button"],
-.theme-forest button {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 10px 25px -3px rgba(52, 211, 153, 0.3);
-  color: #ffffff !important;
-}
-
-/* Progress Bar Theme Styling - Preserve Original Colors */
-.theme-glass .progress-bar,
-.theme-glass .progress-bar-smooth,
-.theme-glass [class*="progress"] {
-  background: #3b82f6 !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.theme-dark .progress-bar,
-.theme-dark .progress-bar-smooth,
-.theme-dark [class*="progress"] {
-  background: #3b82f6 !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.theme-sunset .progress-bar,
-.theme-sunset .progress-bar-smooth,
-.theme-sunset [class*="progress"] {
-  background: #3b82f6 !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.theme-ocean .progress-bar,
-.theme-ocean .progress-bar-smooth,
-.theme-ocean [class*="progress"] {
-  background: #3b82f6 !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.theme-forest .progress-bar,
-.theme-forest .progress-bar-smooth,
-.theme-forest [class*="progress"] {
-  background: #3b82f6 !important;
-  border: none !important;
-  box-shadow: none !important;
 }
