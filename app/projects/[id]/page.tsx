@@ -90,6 +90,7 @@ export default function ProjectDetailPage() {
   
   const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [isProgressBarExpanded, setIsProgressBarExpanded] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -418,6 +419,37 @@ export default function ProjectDetailPage() {
     }
   }, [project, tasks, calculatedProgress, projectId, queryClient]);
 
+  // Scroll event handler for dynamic progress bar
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const threshold = 100; // Start expanding after 100px scroll
+      
+      console.log(`📜 Scroll: ${scrollTop}px, Threshold: ${threshold}px, isProgressBarExpanded: ${isProgressBarExpanded}`);
+      
+      if (scrollTop > threshold && !isProgressBarExpanded) {
+        console.log(`✅ Expanding progress bar - setting isProgressBarExpanded to true`);
+        setIsProgressBarExpanded(true);
+      } else if (scrollTop <= threshold && isProgressBarExpanded) {
+        console.log(`🔽 Collapsing progress bar - setting isProgressBarExpanded to false`);
+        setIsProgressBarExpanded(false);
+      }
+    };
+
+    console.log(`🎯 Setting up scroll event listener for project ${projectId}`);
+    
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Initial check
+    handleScroll();
+    
+    return () => {
+      console.log(`🧹 Cleaning up scroll event listener for project ${projectId}`);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isProgressBarExpanded, projectId]);
+
   if (projectLoading) {
     return (
       <MainLayout>
@@ -447,6 +479,64 @@ export default function ProjectDetailPage() {
 
   return (
     <MainLayout>
+      {/* Debug info */}
+      <div className="fixed top-0 left-0 bg-red-500 text-white p-2 text-xs z-[9999]">
+        Debug: isProgressBarExpanded={isProgressBarExpanded.toString()}, 
+        completedTasks={completedTasks}, 
+        totalTasks={totalTasks}
+        <button 
+          onClick={() => setIsProgressBarExpanded(!isProgressBarExpanded)}
+          className="ml-2 px-2 py-1 bg-blue-500 text-white rounded text-xs"
+        >
+          Toggle Sticky
+        </button>
+      </div>
+      
+      {/* Dynamic Progress Bar */}
+      {isProgressBarExpanded && (
+        <div className="fixed top-16 z-50 bg-white border-b border-gray-200 shadow-sm w-full px-6 py-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-3">
+                  <TrendingUp className="h-5 w-5 text-blue-600" />
+                  <span className="text-sm font-medium text-gray-900">Projekt Haladás</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm text-gray-600">
+                    {completedTasks}/{totalTasks} feladat
+                  </span>
+                  <span className="text-sm font-semibold text-blue-600">
+                    {progressPercentage}%
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(project.project_status)}`}>
+                  {getStatusText(project.project_status)}
+                </span>
+                {project.end_date && (
+                  <div className="flex items-center space-x-2 text-sm text-gray-600">
+                    <Calendar className="h-4 w-4" />
+                    <span>Határidő: {new Date(project.end_date).toLocaleDateString('hu-HU')}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            {/* Progress Bar */}
+            <div className="mt-3">
+              <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div
+                  className={`h-2 rounded-full progress-bar-smooth ${getProgressColor(progressPercentage)}`}
+                  style={{ width: `${progressPercentage}%` }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="space-y-6">
         {/* Header */}
         <div className="space-y-4">
@@ -484,7 +574,7 @@ export default function ProjectDetailPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 ${isProgressBarExpanded ? 'pt-24' : ''}`}>
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Project Info */}

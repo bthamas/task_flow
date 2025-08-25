@@ -2,15 +2,13 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useAppStore } from '@/stores/useAppStore';
-import { Button } from './Button';
-import { Palette, Sparkles, Moon, Sun, Waves, TreePine, Mountain } from 'lucide-react';
+import { Palette, Sparkles, Moon, Sun, Waves, TreePine } from 'lucide-react';
 
 export function ThemeToggle() {
   const { currentTheme, setCurrentTheme } = useAppStore();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -22,83 +20,89 @@ export function ThemeToggle() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleThemeChange = (theme: 'default' | 'glass' | 'dark' | 'sunset' | 'ocean' | 'forest') => {
-    setCurrentTheme(theme);
-    setIsOpen(false);
-  };
-
-  const getThemeIcon = (theme: string) => {
-    switch (theme) {
-      case 'default': return <Palette className="h-4 w-4" />;
-      case 'glass': return <Sparkles className="h-4 w-4" />;
-      case 'dark': return <Moon className="h-4 w-4" />;
-      case 'sunset': return <Sun className="h-4 w-4" />;
-      case 'ocean': return <Waves className="h-4 w-4" />;
-      case 'forest': return <TreePine className="h-4 w-4" />;
-      default: return <Palette className="h-4 w-4" />;
-    }
-  };
-
-  const getThemeColor = (theme: string) => {
-    switch (theme) {
-      case 'default': return 'bg-gray-100 border-gray-300';
-      case 'glass': return 'bg-gradient-to-br from-blue-400 to-purple-500 border-blue-300';
-      case 'dark': return 'bg-gray-800 border-gray-600';
-      case 'sunset': return 'bg-gradient-to-br from-orange-400 to-pink-500 border-orange-300';
-      case 'ocean': return 'bg-gradient-to-br from-cyan-400 to-blue-500 border-cyan-300';
-      case 'forest': return 'bg-gradient-to-br from-green-400 to-emerald-500 border-green-300';
-      default: return 'bg-gray-100 border-gray-300';
-    }
-  };
-
   const themes = [
-    { id: 'default', name: 'Alapértelmezett', description: 'Klasszikus világos kinézet' },
-    { id: 'glass', name: 'Glass', description: 'Üveg hatású modern design' },
-    { id: 'dark', name: 'Dark', description: 'Elegáns sötét mód' },
-    { id: 'sunset', name: 'Sunset', description: 'Meleg naplemente színek' },
-    { id: 'ocean', name: 'Ocean', description: 'Tengeri kék árnyalatok' },
-    { id: 'forest', name: 'Forest', description: 'Természetes zöld tónusok' }
+    { id: 'default', name: 'Alapértelmezett', description: 'Klasszikus világos kinézet', icon: Palette, color: '#6b7280' },
+    { id: 'glass', name: 'Üveg', description: 'Modern üveg hatású design', icon: Sparkles, color: '#8b5cf6' },
+    { id: 'dark', name: 'Sötét', description: 'Elegáns sötét mód', icon: Moon, color: '#1e293b' },
+    { id: 'sunset', name: 'Naplemente', description: 'Meleg naplemente színek', icon: Sun, color: '#f97316' },
+    { id: 'ocean', name: 'Óceán', description: 'Tengeri kék árnyalatok', icon: Waves, color: '#06b6d4' },
+    { id: 'forest', name: 'Erdő', description: 'Természetes zöld tónusok', icon: TreePine, color: '#10b981' }
   ];
+
+  const currentThemeData = themes.find(theme => theme.id === currentTheme);
+  const IconComponent = currentThemeData?.icon || Palette;
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <Button
-        variant="ghost"
-        size="sm"
+      <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 theme-toggle-btn"
+        className="theme-toggle-btn p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2 text-gray-700 hover:text-gray-900"
+        aria-label="Téma váltása"
       >
-        {getThemeIcon(currentTheme)}
-      </Button>
+        <IconComponent size={20} />
+        <span className="hidden sm:inline">Témák</span>
+      </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 py-3 z-50">
-          <div className="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 border-b border-gray-100 dark:border-gray-600 mb-2">
-            Témák
-          </div>
+        <>
+          {/* Overlay to prevent background clicks */}
+          <div 
+            className="fixed inset-0 z-[9998]"
+            onClick={() => setIsOpen(false)}
+          />
           
-          <div className="space-y-1">
-            {themes.map((theme) => (
-              <button
-                key={theme.id}
-                onClick={() => handleThemeChange(theme.id as any)}
-                className={`w-full text-left px-4 py-3 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center space-x-3 transition-all duration-200 rounded-lg mx-2 ${
-                  currentTheme === theme.id 
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700' 
-                    : 'text-gray-700 dark:text-gray-300'
-                }`}
-              >
-                <div className={`w-5 h-5 rounded-full border-2 ${getThemeColor(theme.id)} flex items-center justify-center`}>
-                  {getThemeIcon(theme.id)}
-                </div>
-                <div className="flex-1">
-                  <div className="font-medium">{theme.name}</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">{theme.description}</div>
-                </div>
-              </button>
-            ))}
+          {/* Theme Dropdown */}
+          <div 
+            className="absolute right-0 mt-2 w-80 theme-dropdown rounded-lg overflow-hidden"
+            style={{ 
+              backgroundColor: 'rgba(255, 255, 255, 1)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(229, 231, 235, 0.9)',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4)'
+            }}
+          >
+            <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 border-b border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-1">Téma Választás</h3>
+              <p className="text-sm text-gray-600">Válaszd ki a kedvenc kinézetet</p>
+            </div>
+            
+            <div className="max-h-96 overflow-y-auto">
+              {themes.map((theme) => (
+                <button
+                  key={theme.id}
+                  onClick={() => {
+                    setCurrentTheme(theme.id as any);
+                    setIsOpen(false);
+                  }}
+                  className={`w-full p-4 text-left hover:bg-gray-50 transition-colors duration-200 border-b border-gray-100 last:border-b-0 ${
+                    currentTheme === theme.id ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div 
+                      className="w-10 h-10 rounded-lg flex items-center justify-center"
+                      style={{ backgroundColor: theme.color }}
+                    >
+                      <theme.icon size={20} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium text-gray-900">{theme.name}</span>
+                        {currentTheme === theme.id && (
+                          <span className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full">
+                            Aktív
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm text-gray-600 mt-1">{theme.description}</p>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

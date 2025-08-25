@@ -38,8 +38,15 @@ export const tasksApi = {
     }
 
     if (!projectId) {
-      // If no projectId, return empty array for project tasks
-      return [];
+      // If no projectId, return all tasks for dashboard
+      const { data: tasks, error } = await supabase
+        .from('tasks')
+        .select('*')
+        .order('order_index', { ascending: true });
+
+      if (error) throw error;
+      
+      return tasks.map(task => mapTaskFromDB(task));
     }
     
     // Get tasks from the tasks table for the specific project

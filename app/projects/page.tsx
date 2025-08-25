@@ -42,6 +42,14 @@ const getProgressBorderColor = (progress: number) => {
   return 'border-green-500';
 };
 
+const getProgressCardClass = (progress: number) => {
+  if (progress === 0) return 'card-progress-gray';
+  if (progress < 34) return 'card-progress-red';
+  if (progress < 67) return 'card-progress-orange';
+  if (progress < 100) return 'card-progress-yellow';
+  return 'card-progress-green';
+};
+
 const getStatusText = (status: string) => {
   switch (status) {
     case 'completed':
@@ -95,6 +103,12 @@ export default function ProjectsPage() {
   const { data: clients = [] } = useQuery({
     queryKey: ['clients'],
     queryFn: () => clientsApi.getClients(),
+  });
+
+  // Fetch all tasks for projects
+  const { data: allTasks = [] } = useQuery({
+    queryKey: ['tasks'],
+    queryFn: () => tasksApi.getTasks(),
   });
 
   // Create project mutation
@@ -152,6 +166,14 @@ export default function ProjectsPage() {
     
     setProjectProgress(progressData);
   }, [projects]);
+
+  // Helper function to get task counts for a project
+  const getProjectTaskCounts = (projectId: string) => {
+    const projectTasks = allTasks.filter(task => task.project_id === projectId);
+    const completedTasks = projectTasks.filter(task => task.is_completed).length;
+    const totalTasks = projectTasks.length;
+    return { completedTasks, totalTasks };
+  };
 
   // Filter projects based on search term and status
   const filteredProjects = projects.filter(project => {
@@ -260,118 +282,66 @@ export default function ProjectsPage() {
             <p className="text-gray-600">Nincsenek projektek</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProjects.map((project) => (
               <Card 
                 key={project.id} 
-                className={`border-l-4 ${getProgressBorderColor(getProjectProgress(project))} cursor-pointer hover:shadow-lg transition-all duration-200`}
+                className={`${getProgressCardClass(getProjectProgress(project))} cursor-pointer hover:shadow-lg transition-all duration-200`}
                 onClick={() => handleViewProject(project)}
               >
                 <div className="space-y-4">
                   <div>
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900">{project.title}</h3>
-                        <p className="text-sm text-gray-600 mt-1">{project.description}</p>
-                      </div>
-                      <span className={`
-                        px-2 py-1 rounded-full text-xs font-medium
-                        ${getProjectProgress(project) === 100 ? 'bg-green-100 text-green-700 border border-green-200' : 
-                          getProjectProgress(project) > 0 ? 'bg-blue-100 text-blue-700 border border-blue-200' : 
-                          'bg-gray-100 text-gray-700 border border-gray-200'}
-                      `}>
-                        {getProjectProgress(project) === 100 ? 'Befejezett' : 
-                         getProjectProgress(project) > 0 ? 'Folyamatban' : 
-                         'Nem kezdődött el'}
-                      </span>
-                    </div>
-                    
+                    <h3 className="font-semibold text-gray-900">{project.title}</h3>
                     {project.client && (
-                      <div className="mt-3">
-                        <div className="flex items-center text-sm text-gray-600 mb-2">
-                          <User className="h-4 w-4 mr-1" />
-                          <span 
-                            className="hover:text-blue-600 cursor-pointer transition-colors"
-                            onClick={(e) => handleViewClient(project.client!.id, e)}
-                          >
-                            {project.client.name}
-                          </span>
-                        </div>
-                        <div className="flex space-x-2">
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className="flex-1"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              if (project.client?.email) {
-                                window.open(`mailto:${project.client.email}`, '_blank');
-                              }
-                            }}
-                          >
-                            <Mail className="h-4 w-4 mr-1" />
-                            Email
-                          </Button>
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className="flex-1"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              if (project.client?.phone) {
-                                window.open(`tel:${project.client.phone}`, '_blank');
-                              }
-                            }}
-                          >
-                            <Phone className="h-4 w-4 mr-1" />
-                            Hívás
-                          </Button>
-                        </div>
-                      </div>
+                      <p 
+                        className="text-sm text-gray-600 hover:text-blue-600 cursor-pointer transition-colors"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (project.client) {
+                            router.push(`/clients/${project.client.id}`);
+                          }
+                        }}
+                      >
+                        {project.client.name}
+                      </p>
                     )}
                   </div>
                   
                   <div>
                     <div className="flex justify-between text-sm text-gray-600 mb-2">
                       <span>Haladás</span>
-                      <span className="font-semibold">{getProjectProgress(project)}%</span>
+                      <span className="font-semibold text-blue-600">
+                        {(() => {
+                          const { completedTasks, totalTasks } = getProjectTaskCounts(project.id);
+                          return `(${completedTasks}/${totalTasks}) ${getProjectProgress(project)}%`;
+                        })()}
+                      </span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div
-                        className={`h-2 rounded-full transition-all duration-500 ${getProgressColor(getProjectProgress(project))}`}
+                    <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                      <span
+                        className={`h-2 rounded-full progress-bar-smooth ${getProgressColor(getProjectProgress(project))} block`}
                         style={{ width: `${getProjectProgress(project)}%` }}
                       />
                     </div>
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center text-sm text-gray-500">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      <span>
-                        Határidő: {project.end_date ? new Date(project.end_date).toLocaleDateString('hu-HU') : 'Nincs'}
-                      </span>
-                    </div>
-                    <div className="flex space-x-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={(e) => handleEditProject(project, e)}
-                      >
-                        <Edit className="h-4 w-4 mr-1" />
-                        Szerkesztés
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteProject(project.id);
-                        }}
-                      >
-                        <Trash2 className="h-4 w-4 mr-1" />
-                        Törlés
-                      </Button>
-                    </div>
+                    <span className="text-xs text-gray-500">
+                      {project.end_date ? 
+                        `Határidő: ${new Date(project.end_date).toLocaleDateString('hu-HU')}` :
+                        'Nincs határidő'
+                      }
+                    </span>
+                    <span className={`
+                      px-2 py-1 rounded-full text-xs font-medium
+                      ${getProjectProgress(project) === 100 ? 'bg-green-100 text-green-700 border border-green-200' : 
+                        getProjectProgress(project) > 0 ? 'bg-blue-100 text-blue-700 border border-blue-200' : 
+                        'bg-gray-100 text-gray-700 border border-gray-200'}
+                    `}>
+                      {getProjectProgress(project) === 100 ? 'Befejezett' : 
+                       getProjectProgress(project) > 0 ? 'Folyamatban' : 
+                       'Nem kezdődött el'}
+                    </span>
                   </div>
                 </div>
               </Card>

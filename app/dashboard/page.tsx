@@ -40,14 +40,26 @@ const getStatusColor = (status: string) => {
 
 const getProgressColor = (progress: number) => {
   if (progress === 0) return 'bg-gray-200';
-  if (progress === 100) return 'bg-green-500';
-  return 'bg-orange-500';
+  if (progress < 34) return 'bg-red-500';
+  if (progress < 67) return 'bg-orange-500';
+  if (progress < 100) return 'bg-yellow-500';
+  return 'bg-green-500';
 };
 
 const getProgressBorderColor = (progress: number) => {
   if (progress === 0) return 'border-gray-300';
-  if (progress === 100) return 'border-green-500';
-  return 'border-orange-500';
+  if (progress < 34) return 'border-red-500';
+  if (progress < 67) return 'border-orange-500';
+  if (progress < 100) return 'border-yellow-500';
+  return 'border-green-500';
+};
+
+const getProgressCardClass = (progress: number) => {
+  if (progress === 0) return 'card-progress-gray';
+  if (progress < 34) return 'card-progress-red';
+  if (progress < 67) return 'card-progress-orange';
+  if (progress < 100) return 'card-progress-yellow';
+  return 'card-progress-green';
 };
 
 const getStatusText = (status: string) => {
@@ -109,6 +121,20 @@ export default function DashboardPage() {
     retryDelay: 1000, // Wait 1 second between retries
   });
 
+  // Fetch all tasks for projects
+  const { data: allTasks = [], isLoading: tasksLoading, error: tasksError } = useQuery({
+    queryKey: ['tasks'],
+    queryFn: () => tasksApi.getTasks(),
+    refetchInterval: 10000, // Refetch every 10 seconds instead of 500ms
+    staleTime: 5000, // Consider data fresh for 5 seconds
+    refetchOnWindowFocus: true, // Refetch when window gains focus
+    refetchOnMount: true, // Refetch when component mounts
+    refetchOnReconnect: true, // Refetch when reconnecting
+    gcTime: 300000, // Cache data for 5 minutes
+    retry: 2, // Retry failed requests
+    retryDelay: 1000, // Wait 1 second between retries
+  });
+
   // Manual refresh button instead of automatic interval
   const handleManualRefresh = async () => {
     try {
@@ -122,8 +148,8 @@ export default function DashboardPage() {
   };
 
   // Handle errors gracefully
-  if (projectsError || clientsError) {
-    console.error('Dashboard errors:', { projectsError, clientsError });
+  if (projectsError || clientsError || tasksError) {
+    console.error('Dashboard errors:', { projectsError, clientsError, tasksError });
   }
 
   // Remove the excessive progress syncing that blocks the UI
@@ -133,10 +159,31 @@ export default function DashboardPage() {
   const getProjectProgress = (project: any): number => {
     // Always use the database progress_percentage field
     const progress = project.progress_percentage !== undefined ? project.progress_percentage : 0;
-    
-    // Debug log to see if data is updating
-    console.log(`📊 Dashboard - Project ${project.title}: ${progress}% (from DB: ${project.progress_percentage}, status: ${project.project_status})`);
     return progress;
+  };
+
+  // Helper functions to get task counts for a project
+  const getProjectTaskCounts = (projectId: string) => {
+    // Use the same logic as project detail page - filter from allTasks
+    if (!allTasks || allTasks.length === 0) {
+      return { completedTasks: 0, totalTasks: 0 };
+    }
+    
+    const projectTasks = allTasks.filter(task => task.project_id === projectId);
+    const completedTasks = projectTasks.filter(task => task.is_completed).length;
+    const totalTasks = projectTasks.length;
+    
+    // Debug logging to see what's happening
+    console.log(`🔍 Dashboard Task Counts for Project ${projectId}:`, {
+      allTasksLength: allTasks.length,
+      projectTasksLength: projectTasks.length,
+      completedTasks,
+      totalTasks,
+      sampleTask: allTasks[0],
+      projectTasks: projectTasks
+    });
+    
+    return { completedTasks, totalTasks };
   };
 
   // Calculate statistics based on actual progress
@@ -178,10 +225,9 @@ export default function DashboardPage() {
     return true;
   });
 
-  // Get recent projects (latest 6)
+  // Get all filtered projects (no limit)
   const recentProjects = filteredProjects
-    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-    .slice(0, 6);
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
   const stats = [
     { 
@@ -316,21 +362,14 @@ export default function DashboardPage() {
                 </p>
               )}
             </div>
-            <Button 
-              variant="ghost" 
-              size="sm"
-              onClick={() => router.push('/projects')}
-            >
-              Összes megtekintése
-            </Button>
           </div>
           
-          {projectsError || clientsError ? (
+          {projectsError || clientsError || tasksError ? (
             <div className="text-center py-8">
               <p className="text-red-600">Hiba történt az adatok betöltésekor</p>
               <p className="text-sm text-gray-500 mt-1">Az adatok automatikusan frissülnek...</p>
             </div>
-          ) : projectsLoading || clientsLoading ? (
+          ) : projectsLoading || clientsLoading || tasksLoading ? (
             <div className="text-center py-8">
               <span className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto inline-block"></span>
               <p className="mt-2 text-gray-600">Projektek betöltése...</p>
@@ -463,7 +502,7 @@ export default function DashboardPage() {
                   transition={{ delay: index * 0.1 }}
                 >
                                                        <Card 
-                    className={`border-l-4 ${getProgressBorderColor(getProjectProgress(project))} cursor-pointer hover:shadow-lg transition-all duration-200`}
+                    className={`${getProgressCardClass(getProjectProgress(project))} cursor-pointer hover:shadow-lg transition-all duration-200`}
                     onClick={() => router.push(`/projects/${project.id}`)}
                   >
                      <div className="space-y-4">
@@ -486,8 +525,13 @@ export default function DashboardPage() {
                        
                        <div>
                          <div className="flex justify-between text-sm text-gray-600 mb-2">
-                           <span>Haladás</span>
-                           <span className="font-semibold">{getProjectProgress(project)}%</span>
+                           <span>Haladás ({(() => {
+                             const { completedTasks, totalTasks } = getProjectTaskCounts(project.id);
+                             return `${completedTasks}/${totalTasks} feladat`;
+                           })()})</span>
+                           <span className="font-semibold text-blue-600">
+                             {getProjectProgress(project)}%
+                           </span>
                          </div>
                          <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                            <span
