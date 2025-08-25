@@ -92,9 +92,9 @@ export default function ProjectsPage() {
   const { data: projects = [], isLoading: projectsLoading } = useQuery({
     queryKey: ['projects', statusFilter],
     queryFn: () => projectsApi.getProjects(statusFilter ? { status: statusFilter as any } : undefined),
-    refetchInterval: 2000, // Refetch every 2 seconds for real-time updates
-    staleTime: 0, // Always consider data stale to get fresh updates
-    refetchOnWindowFocus: true, // Refetch when window gains focus
+    refetchInterval: 30000, // Refetch every 30 seconds instead of 2 seconds
+    staleTime: 1000 * 60 * 5, // 5 minutes instead of 0
+    refetchOnWindowFocus: false, // Disable refetch on window focus
   });
 
 

@@ -50,12 +50,12 @@ export default function TasksPage() {
   const { data: notes = [], isLoading: notesLoading, error: notesError } = useQuery({
     queryKey: ['notes'],
     queryFn: () => notesApi.getNotes(),
-    refetchInterval: 5000, // Refetch every 5 seconds for real-time updates
-    staleTime: 1000, // Consider data stale after 1 second
-    refetchOnWindowFocus: true, // Refetch when window gains focus
+    refetchInterval: 30000, // Refetch every 30 seconds instead of 5 seconds
+    staleTime: 1000 * 60 * 5, // 5 minutes instead of 1 second
+    refetchOnWindowFocus: false, // Disable refetch on window focus
     refetchOnMount: true, // Refetch when component mounts
     refetchOnReconnect: true, // Refetch when reconnecting
-    gcTime: 300000, // Cache data for 5 minutes
+    gcTime: 1000 * 60 * 10, // Cache data for 10 minutes instead of 5
     retry: 1, // Retry once on error
   });
 

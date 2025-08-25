@@ -25,6 +25,9 @@ export default function ClientsPage() {
   const { data: clients = [], isLoading: clientsLoading } = useQuery({
     queryKey: ['clients'],
     queryFn: () => clientsApi.getClients(),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    refetchOnWindowFocus: false, // Disable refetch on window focus
+    gcTime: 1000 * 60 * 10, // Cache data for 10 minutes
   });
 
   // Create client mutation
